@@ -2,11 +2,16 @@ const mongoose = require('mongoose');
 
 const blogSchema = new mongoose.Schema({
     title: { type: String },
-    contant: { type: String },
+    subTitle: { type: String, default: null },
+    content: { type: String },
     category: { type: String },
-    tags: [{ type: String }],
-    status: { type: String, enum: ['draft', 'published', 'scheduled'], default: 'draft' },
-    isDeleted: { type: Boolean, default: false }
-} , { timestamps: true });
+    coverImage: { type: String },
+    mainImage: { type: String },
+    author: { type: String },
+    quote: { type: String },
+    isFeatured: { type: Boolean, default: false },
+    isDeleted: { type: Boolean, default: false },
+    isBlocked: { type: Boolean, default: false },
+} , { timestamps: true, versionKey: false });
 
-export const blogModel = mongoose.model('Blog', blogSchema);
+export const blogModel = mongoose.model('blog', blogSchema);

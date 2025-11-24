@@ -1,0 +1,3383 @@
+{
+	"info": {
+		"_postman_id": "hk-digiskill-api-collection",
+		"name": "HK DigiSkill API Collection",
+		"description": "Complete API collection for HK DigiSkill Backend",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Sign UP",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"fullName\": \"Pramit Mangukiya\",\n    \"email\": \"pramitmangukiya602@gmail.com\",\n    \"password\": \"Admin@123\",\n    \"phone\": \"9725097885\",\n    \"designation\": \"Developer\",\n    \"agreeTerms\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/auth/signup",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"auth",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"pramitmangukiya602@gmail.com\",\n    \"password\": \"Admin@123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/auth/login",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "OTP Verify",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"pramitmangukiya602@gmail.com\",\n    \"otp\": \"890012\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/auth/otp/verify",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"auth",
+								"otp",
+								"verify"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Forgot Password",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"pramitmangukiya602@gmail.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/auth/forgot-password",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"auth",
+								"forgot-password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Reset Password",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"pramitmangukiya602@gmail.com\",\n    \"newPassword\": \"Admin@123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/auth/reset-password",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"auth",
+								"reset-password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Resend OTP",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"pramitmangukiya602@gmail.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/auth/resend-otp",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"auth",
+								"resend-otp"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Change Password After Login in Panel use",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"pramitmangukiya602@gmail.com\",\n    \"oldPassword\": \"Admin@1234\",\n    \"newPassword\": \"Admin@123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/auth/change-password",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"auth",
+								"change-password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Profile",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"fullName\": \"Pramit Mangukiya Updated\",\n    \"phone\": \"9725097885\",\n    \"designation\": \"Senior Developer\",\n    \"profilePhoto\": \"https://example.com/photo.jpg\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/auth/update-profile",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"auth",
+								"update-profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User Account",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"fullName\": \"Pramit Mangukiya\",\n    \"email\": \"pramitmangukiya602@gmail.com\",\n    \"password\": \"Admin@123\",\n    \"reason\": \"No longer using the service\",\n    \"rate\": 5\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/auth/delete-account",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"auth",
+								"delete-account"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "apikey",
+				"apikey": [
+					{
+						"key": "value",
+						"value": "{{TOKEN}}",
+						"type": "string"
+					},
+					{
+						"key": "key",
+						"value": "authorization",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "User Add/User Sign Up",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "authorization",
+								"value": "YOUR_ADMIN_TOKEN_HERE"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"fullName\": \"Pramit Mangukiya\",\n    \"email\": \"pramit6515@gmail.com\",\n    \"phoneNumber\": \"9725097885\",\n    \"password\": \"Admin@123\",\n    \"designation\": \"Manager\",\n    \"agreeTerms\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/user/add",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"user",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User Edit",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "authorization",
+								"value": "YOUR_ADMIN_TOKEN_HERE"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"userId\": \"6914273715a2679b997e1b2c\",\n    \"fullName\": \"Pramit Mangukiya\",\n    \"email\": \"pramit6515@gmail.com\",\n    \"phoneNumber\": \"9725097885\",\n    \"password\": \"Admin@123\",\n    \"designation\": \"Manager\",\n    \"agreeTerms\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/user/update",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"user",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User By Id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/user/delete/",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"user",
+								"delete",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User Get All",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/user/all?page=1&limit=10&search=john&roleFilter=user",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"user",
+								"all"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								},
+								{
+									"key": "search",
+									"value": "john"
+								},
+								{
+									"key": "roleFilter",
+									"value": "user"
+								},
+								{
+									"key": "startDate",
+									"value": "2024-01-01",
+									"disabled": true
+								},
+								{
+									"key": "endDate",
+									"value": "2024-12-31",
+									"disabled": true
+								},
+								{
+									"key": "activeFilter",
+									"value": "true",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/user/",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"user",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "apikey",
+				"apikey": [
+					{
+						"key": "value",
+						"value": "{{TOKEN}}",
+						"type": "string"
+					},
+					{
+						"key": "key",
+						"value": "authorization",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Blog",
+			"item": [
+				{
+					"name": "Blog Add",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"My First Blog\",\n    \"subTitle\": \"Subtitle here\",\n    \"content\": \"Blog content here\",\n    \"category\": \"Technology\",\n    \"coverImage\": \"https://example.com/cover.jpg\",\n    \"mainImage\": \"https://example.com/main.jpg\",\n    \"author\": \"John Doe\",\n    \"quote\": \"Inspirational quote\",\n    \"isFeatured\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/blog/add",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"blog",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Blog Edit By Id",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"blogId\": \"691550f79ac0cb6c92816e31\",\n    \"title\": \"My First Blog\",\n    \"subTitle\": \"Subtitle here\",\n    \"content\": \"Blog content here\",\n    \"category\": \"Technology\",\n    \"coverImage\": \"https://example.com/cover.jpg\",\n    \"mainImage\": \"https://example.com/main.jpg\",\n    \"author\": \"John Doe\",\n    \"quote\": \"Inspirational quote\",\n    \"isFeatured\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/blog/edit",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"blog",
+								"edit"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delet Blog By Id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/blog/delete/691550f79ac0cb6c92816e31",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"blog",
+								"delete",
+								"691550f79ac0cb6c92816e31"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Blog",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/blog/all?page=1&limit=10&search=technology",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"blog",
+								"all"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								},
+								{
+									"key": "startDate",
+									"value": "2024-01-01",
+									"disabled": true
+								},
+								{
+									"key": "endDate",
+									"value": "2024-12-31",
+									"disabled": true
+								},
+								{
+									"key": "search",
+									"value": "technology"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Blog By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/blog/691550f79ac0cb6c92816e31",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"blog",
+								"691550f79ac0cb6c92816e31"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "apikey",
+				"apikey": [
+					{
+						"key": "value",
+						"value": "{{TOKEN}}",
+						"type": "string"
+					},
+					{
+						"key": "key",
+						"value": "authorization",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Course Category",
+			"item": [
+				{
+					"name": "Add Course Category",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "authorization",
+								"value": "{{ADMIN_TOKEN}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Web Development\",\n  \"description\": \"Learn web development\",\n  \"countCoursesNumber\": 10,\n  \"addCourses\": true,\n  \"isFeatured\": true\n}"
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/course-category/add",
+							"host": ["{{BASE_URL}}"],
+							"path": ["course-category", "add"]
+						}
+					}
+				},
+				{
+					"name": "Update Course Category",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "authorization",
+								"value": "{{ADMIN_TOKEN}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"courseCategoryId\": \"CATEGORY_ID_HERE\",\n  \"name\": \"Advanced Web Development\",\n  \"description\": \"Advanced web development courses\",\n  \"isFeatured\": true\n}"
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/course-category/edit",
+							"host": ["{{BASE_URL}}"],
+							"path": ["course-category", "edit"]
+						}
+					}
+				},
+				{
+					"name": "Delete Course Category",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{ADMIN_TOKEN}}"
+							}
+						],
+						"url": {
+							"raw": "{{BASE_URL}}/course-category/CATEGORY_ID_HERE",
+							"host": ["{{BASE_URL}}"],
+							"path": ["course-category", "CATEGORY_ID_HERE"]
+						}
+					}
+				},
+				{
+					"name": "Get All Course Categories",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "{{BASE_URL}}/course-category/all?page=1&limit=10&search=web&startDate=2024-01-01&endDate=2024-12-31",
+							"host": ["{{BASE_URL}}"],
+							"path": ["course-category", "all"],
+							"query": [
+								{"key": "page", "value": "1"},
+								{"key": "limit", "value": "10"},
+								{"key": "search", "value": "web"},
+								{"key": "startDate", "value": "2024-01-01"},
+								{"key": "endDate", "value": "2024-12-31"}
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Course Category By ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/course-category/get/CATEGORY_ID_HERE",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"course-category",
+								"get",
+								"CATEGORY_ID_HERE"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "apikey",
+				"apikey": [
+					{
+						"key": "value",
+						"value": "{{TOKEN}}",
+						"type": "string"
+					},
+					{
+						"key": "key",
+						"value": "authorization",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Course",
+			"item": [
+				{
+					"name": "Add Course",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "authorization",
+								"value": "{{ADMIN_TOKEN}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"courseName\": \"React Masterclass\",\n  \"courseCategoryId\": \"CATEGORY_ID_HERE\",\n  \"description\": \"Learn React from scratch\",\n  \"price\": 99.99,\n  \"image\": \"https://example.com/course.jpg\",\n  \"purchasedCoursesShow\": true,\n  \"enrolledLearners\": 0,\n  \"classCompleted\": 0,\n  \"satisfactionRate\": 0\n}"
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/course/add",
+							"host": ["{{BASE_URL}}"],
+							"path": ["course", "add"]
+						}
+					}
+				},
+				{
+					"name": "Update Course",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "authorization",
+								"value": "{{ADMIN_TOKEN}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"courseId\": \"COURSE_ID_HERE\",\n  \"courseName\": \"Advanced React Masterclass\",\n  \"price\": 149.99,\n  \"enrolledLearners\": 50\n}"
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/course/update",
+							"host": ["{{BASE_URL}}"],
+							"path": ["course", "update"]
+						}
+					}
+				},
+				{
+					"name": "Delete Course",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{ADMIN_TOKEN}}"
+							}
+						],
+						"url": {
+							"raw": "{{BASE_URL}}/course/delete/COURSE_ID_HERE",
+							"host": ["{{BASE_URL}}"],
+							"path": ["course", "delete", "COURSE_ID_HERE"]
+						}
+					}
+				},
+				{
+					"name": "Purchase Course",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "authorization",
+								"value": "{{USER_TOKEN}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"courseId\": \"COURSE_ID_HERE\",\n  \"razorpayOrderId\": \"ORDER_ID_HERE\",\n  \"razorpayPaymentId\": \"PAYMENT_ID_HERE\"\n}"
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/course/purchase",
+							"host": ["{{BASE_URL}}"],
+							"path": ["course", "purchase"]
+						}
+					}
+				},
+				{
+					"name": "Get My Courses",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{USER_TOKEN}}"
+							}
+						],
+						"url": {
+							"raw": "{{BASE_URL}}/course/my-courses?page=1&limit=10",
+							"host": ["{{BASE_URL}}"],
+							"path": ["course", "my-courses"],
+							"query": [
+								{"key": "page", "value": "1"},
+								{"key": "limit", "value": "10"}
+							]
+						}
+					}
+				},
+				{
+					"name": "Get All Courses",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "{{BASE_URL}}/course/get?page=1&limit=10&search=react&courseCategoryId=CATEGORY_ID_HERE&startDate=2024-01-01&endDate=2024-12-31",
+							"host": ["{{BASE_URL}}"],
+							"path": ["course", "get"],
+							"query": [
+								{"key": "page", "value": "1"},
+								{"key": "limit", "value": "10"},
+								{"key": "search", "value": "react"},
+								{"key": "courseCategoryId", "value": "CATEGORY_ID_HERE"},
+								{"key": "startDate", "value": "2024-01-01"},
+								{"key": "endDate", "value": "2024-12-31"}
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Course By ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/course/COURSE_ID_HERE",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"course",
+								"COURSE_ID_HERE"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "apikey",
+				"apikey": [
+					{
+						"key": "value",
+						"value": "{{TOKEN}}",
+						"type": "string"
+					},
+					{
+						"key": "key",
+						"value": "authorization",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Settings",
+			"item": [
+				{
+					"name": "Add/Edit Settings",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "authorization",
+								"value": "{{ADMIN_TOKEN}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"logo\": \"https://example.com/logo.png\",\n  \"razorpayKey\": \"YOUR_RAZORPAY_KEY\",\n  \"razorpaySecret\": \"YOUR_RAZORPAY_SECRET\",\n  \"enrolledLearners\": 1000,\n  \"classCompleted\": 500,\n  \"satisfactionRate\": 95\n}"
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/settings/add-edit",
+							"host": ["{{BASE_URL}}"],
+							"path": ["settings", "add-edit"]
+						}
+					}
+				},
+				{
+					"name": "Get Settings",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/settings/get",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"settings",
+								"get"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "apikey",
+				"apikey": [
+					{
+						"key": "value",
+						"value": "{{TOKEN}}",
+						"type": "string"
+					},
+					{
+						"key": "key",
+						"value": "authorization",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Hero Banner",
+			"item": [
+				{
+					"name": "Add Hero Banner",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "authorization",
+								"value": "{{ADMIN_TOKEN}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"type\": \"Web\",\n  \"title\": \"Welcome to Our Platform\",\n  \"description\": \"Learn new skills\",\n  \"images\": [\"https://example.com/image1.jpg\", \"https://example.com/image2.jpg\"]\n}"
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/hero-banner/add",
+							"host": ["{{BASE_URL}}"],
+							"path": ["hero-banner", "add"]
+						}
+					}
+				},
+				{
+					"name": "Update Hero Banner",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "authorization",
+								"value": "{{ADMIN_TOKEN}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"heroBannerId\": \"BANNER_ID_HERE\",\n  \"title\": \"Updated Title\",\n  \"description\": \"Updated description\"\n}"
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/hero-banner/edit",
+							"host": ["{{BASE_URL}}"],
+							"path": ["hero-banner", "edit"]
+						}
+					}
+				},
+				{
+					"name": "Delete Hero Banner",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{ADMIN_TOKEN}}"
+							}
+						],
+						"url": {
+							"raw": "{{BASE_URL}}/hero-banner/delete/BANNER_ID_HERE",
+							"host": ["{{BASE_URL}}"],
+							"path": ["hero-banner", "delete", "BANNER_ID_HERE"]
+						}
+					}
+				},
+				{
+					"name": "Get All Hero Banners",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "{{BASE_URL}}/hero-banner/all?page=1&limit=10&search=welcome&type=Web&startDate=2024-01-01&endDate=2024-12-31",
+							"host": ["{{BASE_URL}}"],
+							"path": ["hero-banner", "all"],
+							"query": [
+								{"key": "page", "value": "1"},
+								{"key": "limit", "value": "10"},
+								{"key": "search", "value": "welcome"},
+								{"key": "type", "value": "Web"},
+								{"key": "startDate", "value": "2024-01-01"},
+								{"key": "endDate", "value": "2024-12-31"}
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Hero Banner By ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/hero-banner/BANNER_ID_HERE",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"hero-banner",
+								"BANNER_ID_HERE"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "apikey",
+				"apikey": [
+					{
+						"key": "value",
+						"value": "{{TOKEN}}",
+						"type": "string"
+					},
+					{
+						"key": "key",
+						"value": "authorization",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Testimonial",
+			"item": [
+				{
+					"name": "Add Testimonial",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "authorization",
+								"value": "{{ADMIN_TOKEN}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"image\": \"https://example.com/photo.jpg\",\n  \"name\": \"John Doe\",\n  \"designation\": \"Software Engineer\",\n  \"rate\": 5,\n  \"description\": \"Great course!\",\n  \"isFeatured\": true,\n  \"type\": \"Course\"\n}"
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/testimonial/add",
+							"host": ["{{BASE_URL}}"],
+							"path": ["testimonial", "add"]
+						}
+					}
+				},
+				{
+					"name": "Update Testimonial",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "authorization",
+								"value": "{{ADMIN_TOKEN}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"testimonialId\": \"TESTIMONIAL_ID_HERE\",\n  \"name\": \"John Doe Updated\",\n  \"rate\": 5\n}"
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/testimonial/edit",
+							"host": ["{{BASE_URL}}"],
+							"path": ["testimonial", "edit"]
+						}
+					}
+				},
+				{
+					"name": "Delete Testimonial",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{ADMIN_TOKEN}}"
+							}
+						],
+						"url": {
+							"raw": "{{BASE_URL}}/testimonial/delete/TESTIMONIAL_ID_HERE",
+							"host": ["{{BASE_URL}}"],
+							"path": ["testimonial", "delete", "TESTIMONIAL_ID_HERE"]
+						}
+					}
+				},
+				{
+					"name": "Get All Testimonials",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "{{BASE_URL}}/testimonial/all?page=1&limit=10&search=john&type=Course&isFeatured=true&startDate=2024-01-01&endDate=2024-12-31",
+							"host": ["{{BASE_URL}}"],
+							"path": ["testimonial", "all"],
+							"query": [
+								{"key": "page", "value": "1"},
+								{"key": "limit", "value": "10"},
+								{"key": "search", "value": "john"},
+								{"key": "type", "value": "Course"},
+								{"key": "isFeatured", "value": "true"},
+								{"key": "startDate", "value": "2024-01-01"},
+								{"key": "endDate", "value": "2024-12-31"}
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Testimonial By ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/testimonial/TESTIMONIAL_ID_HERE",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"testimonial",
+								"TESTIMONIAL_ID_HERE"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "apikey",
+				"apikey": [
+					{
+						"key": "value",
+						"value": "{{TOKEN}}",
+						"type": "string"
+					},
+					{
+						"key": "key",
+						"value": "authorization",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Trusted Partner",
+			"item": [
+				{
+					"name": "Add Trusted Partner",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "authorization",
+								"value": "{{ADMIN_TOKEN}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"image\": \"https://example.com/partner.jpg\",\n  \"name\": \"Partner Company\",\n  \"description\": \"Our trusted partner\"\n}"
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/trusted-partner/add",
+							"host": ["{{BASE_URL}}"],
+							"path": ["trusted-partner", "add"]
+						}
+					}
+				},
+				{
+					"name": "Update Trusted Partner",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "authorization",
+								"value": "{{ADMIN_TOKEN}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"trustedPartnerId\": \"PARTNER_ID_HERE\",\n  \"name\": \"Updated Partner Name\"\n}"
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/trusted-partner/edit",
+							"host": ["{{BASE_URL}}"],
+							"path": ["trusted-partner", "edit"]
+						}
+					}
+				},
+				{
+					"name": "Delete Trusted Partner",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{ADMIN_TOKEN}}"
+							}
+						],
+						"url": {
+							"raw": "{{BASE_URL}}/trusted-partner/delete/PARTNER_ID_HERE",
+							"host": ["{{BASE_URL}}"],
+							"path": ["trusted-partner", "delete", "PARTNER_ID_HERE"]
+						}
+					}
+				},
+				{
+					"name": "Get All Trusted Partners",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "{{BASE_URL}}/trusted-partner/all?page=1&limit=10&search=partner&startDate=2024-01-01&endDate=2024-12-31",
+							"host": ["{{BASE_URL}}"],
+							"path": ["trusted-partner", "all"],
+							"query": [
+								{"key": "page", "value": "1"},
+								{"key": "limit", "value": "10"},
+								{"key": "search", "value": "partner"},
+								{"key": "startDate", "value": "2024-01-01"},
+								{"key": "endDate", "value": "2024-12-31"}
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Trusted Partner By ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/trusted-partner/PARTNER_ID_HERE",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"trusted-partner",
+								"PARTNER_ID_HERE"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "apikey",
+				"apikey": [
+					{
+						"key": "value",
+						"value": "{{TOKEN}}",
+						"type": "string"
+					},
+					{
+						"key": "key",
+						"value": "authorization",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "FAQ",
+			"item": [
+				{
+					"name": "Add FAQ",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "authorization",
+								"value": "{{ADMIN_TOKEN}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"question\": \"What is this course about?\",\n  \"answer\": \"This course teaches web development\",\n  \"isFeatured\": true,\n  \"type\": \"Course\"\n}"
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/faq/add",
+							"host": ["{{BASE_URL}}"],
+							"path": ["faq", "add"]
+						}
+					}
+				},
+				{
+					"name": "Update FAQ",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "authorization",
+								"value": "{{ADMIN_TOKEN}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"faqId\": \"FAQ_ID_HERE\",\n  \"question\": \"Updated question\",\n  \"answer\": \"Updated answer\"\n}"
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/faq/edit",
+							"host": ["{{BASE_URL}}"],
+							"path": ["faq", "edit"]
+						}
+					}
+				},
+				{
+					"name": "Delete FAQ",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{ADMIN_TOKEN}}"
+							}
+						],
+						"url": {
+							"raw": "{{BASE_URL}}/faq/delete/FAQ_ID_HERE",
+							"host": ["{{BASE_URL}}"],
+							"path": ["faq", "delete", "FAQ_ID_HERE"]
+						}
+					}
+				},
+				{
+					"name": "Get All FAQs",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "{{BASE_URL}}/faq/all?page=1&limit=10&search=course&type=Course&isFeatured=true&startDate=2024-01-01&endDate=2024-12-31",
+							"host": ["{{BASE_URL}}"],
+							"path": ["faq", "all"],
+							"query": [
+								{"key": "page", "value": "1"},
+								{"key": "limit", "value": "10"},
+								{"key": "search", "value": "course"},
+								{"key": "type", "value": "Course"},
+								{"key": "isFeatured", "value": "true"},
+								{"key": "startDate", "value": "2024-01-01"},
+								{"key": "endDate", "value": "2024-12-31"}
+							]
+						}
+					}
+				},
+				{
+					"name": "Get FAQ By ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/faq/FAQ_ID_HERE",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"faq",
+								"FAQ_ID_HERE"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "apikey",
+				"apikey": [
+					{
+						"key": "value",
+						"value": "{{TOKEN}}",
+						"type": "string"
+					},
+					{
+						"key": "key",
+						"value": "authorization",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Newsletter",
+			"item": [
+				{
+					"name": "Subscribe Newsletter",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"user@example.com\"\n}"
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/newsletter/add",
+							"host": ["{{BASE_URL}}"],
+							"path": ["newsletter", "add"]
+						}
+					}
+				},
+				{
+					"name": "Unsubscribe Newsletter",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{ADMIN_TOKEN}}"
+							}
+						],
+						"url": {
+							"raw": "{{BASE_URL}}/newsletter/delete/NEWSLETTER_ID_HERE",
+							"host": ["{{BASE_URL}}"],
+							"path": ["newsletter", "delete", "NEWSLETTER_ID_HERE"]
+						}
+					}
+				},
+				{
+					"name": "Get All Newsletter Subscriptions",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{ADMIN_TOKEN}}"
+							}
+						],
+						"url": {
+							"raw": "{{BASE_URL}}/newsletter/all?page=1&limit=10&search=user@example.com&startDate=2024-01-01&endDate=2024-12-31",
+							"host": ["{{BASE_URL}}"],
+							"path": ["newsletter", "all"],
+							"query": [
+								{"key": "page", "value": "1"},
+								{"key": "limit", "value": "10"},
+								{"key": "search", "value": "user@example.com"},
+								{"key": "startDate", "value": "2024-01-01"},
+								{"key": "endDate", "value": "2024-12-31"}
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Newsletter By ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/newsletter/NEWSLETTER_ID_HERE",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"newsletter",
+								"NEWSLETTER_ID_HERE"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "apikey",
+				"apikey": [
+					{
+						"key": "value",
+						"value": "{{TOKEN}}",
+						"type": "string"
+					},
+					{
+						"key": "key",
+						"value": "authorization",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Gallery",
+			"item": [
+				{
+					"name": "Add Gallery",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "authorization",
+								"value": "{{ADMIN_TOKEN}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"images\": [\"https://example.com/img1.jpg\", \"https://example.com/img2.jpg\"],\n  \"title\": \"Event Gallery\",\n  \"description\": \"Photos from our event\"\n}"
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/gallery/add",
+							"host": ["{{BASE_URL}}"],
+							"path": ["gallery", "add"]
+						}
+					}
+				},
+				{
+					"name": "Update Gallery",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "authorization",
+								"value": "{{ADMIN_TOKEN}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"galleryId\": \"GALLERY_ID_HERE\",\n  \"title\": \"Updated Gallery Title\"\n}"
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/gallery/edit",
+							"host": ["{{BASE_URL}}"],
+							"path": ["gallery", "edit"]
+						}
+					}
+				},
+				{
+					"name": "Delete Gallery",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{ADMIN_TOKEN}}"
+							}
+						],
+						"url": {
+							"raw": "{{BASE_URL}}/gallery/delete/GALLERY_ID_HERE",
+							"host": ["{{BASE_URL}}"],
+							"path": ["gallery", "delete", "GALLERY_ID_HERE"]
+						}
+					}
+				},
+				{
+					"name": "Get All Galleries",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "{{BASE_URL}}/gallery/all?page=1&limit=10&search=event&startDate=2024-01-01&endDate=2024-12-31",
+							"host": ["{{BASE_URL}}"],
+							"path": ["gallery", "all"],
+							"query": [
+								{"key": "page", "value": "1"},
+								{"key": "limit", "value": "10"},
+								{"key": "search", "value": "event"},
+								{"key": "startDate", "value": "2024-01-01"},
+								{"key": "endDate", "value": "2024-12-31"}
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Gallery By ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/gallery/GALLERY_ID_HERE",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"gallery",
+								"GALLERY_ID_HERE"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "apikey",
+				"apikey": [
+					{
+						"key": "value",
+						"value": "{{TOKEN}}",
+						"type": "string"
+					},
+					{
+						"key": "key",
+						"value": "authorization",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Legality",
+			"item": [
+				{
+					"name": "Add Legality",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "authorization",
+								"value": "{{ADMIN_TOKEN}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"type\": \"TermsCondition\",\n  \"content\": \"Terms and conditions content here...\"\n}"
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/legality/add",
+							"host": ["{{BASE_URL}}"],
+							"path": ["legality", "add"]
+						}
+					}
+				},
+				{
+					"name": "Update Legality",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "authorization",
+								"value": "{{ADMIN_TOKEN}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"legalityId\": \"LEGALITY_ID_HERE\",\n  \"content\": \"Updated content...\"\n}"
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/legality/edit",
+							"host": ["{{BASE_URL}}"],
+							"path": ["legality", "edit"]
+						}
+					}
+				},
+				{
+					"name": "Get All Legalities",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "{{BASE_URL}}/legality/all?page=1&limit=10&type=TermsCondition&startDate=2024-01-01&endDate=2024-12-31",
+							"host": ["{{BASE_URL}}"],
+							"path": ["legality", "all"],
+							"query": [
+								{"key": "page", "value": "1"},
+								{"key": "limit", "value": "10"},
+								{"key": "type", "value": "TermsCondition"},
+								{"key": "startDate", "value": "2024-01-01"},
+								{"key": "endDate", "value": "2024-12-31"}
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Legality By ID",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "{{BASE_URL}}/legality/LEGALITY_ID_HERE",
+							"host": ["{{BASE_URL}}"],
+							"path": ["legality", "LEGALITY_ID_HERE"]
+						}
+					}
+				},
+				{
+					"name": "Get Legality By Type",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/legality/type/TermsCondition",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"legality",
+								"type",
+								"TermsCondition"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "apikey",
+				"apikey": [
+					{
+						"key": "value",
+						"value": "{{TOKEN}}",
+						"type": "string"
+					},
+					{
+						"key": "key",
+						"value": "authorization",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Get In Touch",
+			"item": [
+				{
+					"name": "Add Contact Message",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"John Doe\",\n  \"email\": \"john@example.com\",\n  \"phoneNumber\": \"+1234567890\",\n  \"subject\": \"Inquiry\",\n  \"message\": \"I have a question about your services\"\n}"
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/get-in-touch/add",
+							"host": ["{{BASE_URL}}"],
+							"path": ["get-in-touch", "add"]
+						}
+					}
+				},
+				{
+					"name": "Update Contact Message",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "authorization",
+								"value": "{{ADMIN_TOKEN}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"getInTouchId\": \"CONTACT_ID_HERE\",\n  \"isRead\": true\n}"
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/get-in-touch/edit",
+							"host": ["{{BASE_URL}}"],
+							"path": ["get-in-touch", "edit"]
+						}
+					}
+				},
+				{
+					"name": "Delete Contact Message",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{ADMIN_TOKEN}}"
+							}
+						],
+						"url": {
+							"raw": "{{BASE_URL}}/get-in-touch/delete/CONTACT_ID_HERE",
+							"host": ["{{BASE_URL}}"],
+							"path": ["get-in-touch", "delete", "CONTACT_ID_HERE"]
+						}
+					}
+				},
+				{
+					"name": "Get All Contact Messages",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{ADMIN_TOKEN}}"
+							}
+						],
+						"url": {
+							"raw": "{{BASE_URL}}/get-in-touch/all?page=1&limit=10&search=john&isRead=false&startDate=2024-01-01&endDate=2024-12-31",
+							"host": ["{{BASE_URL}}"],
+							"path": ["get-in-touch", "all"],
+							"query": [
+								{"key": "page", "value": "1"},
+								{"key": "limit", "value": "10"},
+								{"key": "search", "value": "john"},
+								{"key": "isRead", "value": "false"},
+								{"key": "startDate", "value": "2024-01-01"},
+								{"key": "endDate", "value": "2024-12-31"}
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Contact Message By ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/get-in-touch/CONTACT_ID_HERE",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"get-in-touch",
+								"CONTACT_ID_HERE"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "apikey",
+				"apikey": [
+					{
+						"key": "value",
+						"value": "{{TOKEN}}",
+						"type": "string"
+					},
+					{
+						"key": "key",
+						"value": "authorization",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Workshop",
+			"item": [
+				{
+					"name": "Add Workshop",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "authorization",
+								"value": "{{ADMIN_TOKEN}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"image\": \"https://example.com/workshop.jpg\",\n  \"title\": \"Advanced React Workshop\",\n  \"subTitle\": \"Learn React in depth\",\n  \"about\": \"Comprehensive React workshop\",\n  \"price\": 199.99,\n  \"mrpPrice\": 299.99,\n  \"language\": \"English\",\n  \"duration\": \"40 hours\"\n}"
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/workshop/add",
+							"host": ["{{BASE_URL}}"],
+							"path": ["workshop", "add"]
+						}
+					}
+				},
+				{
+					"name": "Update Workshop",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "authorization",
+								"value": "{{ADMIN_TOKEN}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"workshopId\": \"WORKSHOP_ID_HERE\",\n  \"title\": \"Updated Workshop Title\",\n  \"price\": 249.99\n}"
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/workshop/edit",
+							"host": ["{{BASE_URL}}"],
+							"path": ["workshop", "edit"]
+						}
+					}
+				},
+				{
+					"name": "Delete Workshop",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{ADMIN_TOKEN}}"
+							}
+						],
+						"url": {
+							"raw": "{{BASE_URL}}/workshop/delete/WORKSHOP_ID_HERE",
+							"host": ["{{BASE_URL}}"],
+							"path": ["workshop", "delete", "WORKSHOP_ID_HERE"]
+						}
+					}
+				},
+				{
+					"name": "Get All Workshops",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "{{BASE_URL}}/workshop/all?page=1&limit=10&search=react&startDate=2024-01-01&endDate=2024-12-31",
+							"host": ["{{BASE_URL}}"],
+							"path": ["workshop", "all"],
+							"query": [
+								{"key": "page", "value": "1"},
+								{"key": "limit", "value": "10"},
+								{"key": "search", "value": "react"},
+								{"key": "startDate", "value": "2024-01-01"},
+								{"key": "endDate", "value": "2024-12-31"}
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Workshop By ID",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "{{BASE_URL}}/workshop/WORKSHOP_ID_HERE",
+							"host": ["{{BASE_URL}}"],
+							"path": ["workshop", "WORKSHOP_ID_HERE"]
+						}
+					}
+				},
+				{
+					"name": "Purchase Workshop",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "authorization",
+								"value": "{{USER_TOKEN}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"workshop_id\": \"WORKSHOP_ID_HERE\",\n  \"amount\": 199.99,\n  \"payment_id\": \"PAYMENT_ID_HERE\",\n  \"payment_method\": \"razorpay\",\n  \"final_amount\": 199.99\n}"
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/workshop/purchase",
+							"host": ["{{BASE_URL}}"],
+							"path": ["workshop", "purchase"]
+						}
+					}
+				},
+				{
+					"name": "Get My Workshops",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/workshop/my-workshops?page=1&limit=10",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"workshop",
+								"my-workshops"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "apikey",
+				"apikey": [
+					{
+						"key": "value",
+						"value": "{{TOKEN}}",
+						"type": "string"
+					},
+					{
+						"key": "key",
+						"value": "authorization",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Workshop Curriculum",
+			"item": [
+				{
+					"name": "Add Workshop Curriculum",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "authorization",
+								"value": "{{ADMIN_TOKEN}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"workshopId\": \"WORKSHOP_ID_HERE\",\n  \"date\": \"2024-12-01\",\n  \"thumbnail\": \"https://example.com/thumb.jpg\",\n  \"videoLink\": \"https://example.com/video.mp4\",\n  \"title\": \"Introduction to React\",\n  \"description\": \"Learn the basics\",\n  \"duration\": \"2 hours\",\n  \"attachment\": \"https://example.com/notes.pdf\"\n}"
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/workshop-curriculum/add",
+							"host": ["{{BASE_URL}}"],
+							"path": ["workshop-curriculum", "add"]
+						}
+					}
+				},
+				{
+					"name": "Update Workshop Curriculum",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "authorization",
+								"value": "{{ADMIN_TOKEN}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"workshopCurriculumId\": \"CURRICULUM_ID_HERE\",\n  \"title\": \"Updated Title\",\n  \"duration\": \"3 hours\"\n}"
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/workshop-curriculum/edit",
+							"host": ["{{BASE_URL}}"],
+							"path": ["workshop-curriculum", "edit"]
+						}
+					}
+				},
+				{
+					"name": "Delete Workshop Curriculum",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{ADMIN_TOKEN}}"
+							}
+						],
+						"url": {
+							"raw": "{{BASE_URL}}/workshop-curriculum/delete/CURRICULUM_ID_HERE",
+							"host": ["{{BASE_URL}}"],
+							"path": ["workshop-curriculum", "delete", "CURRICULUM_ID_HERE"]
+						}
+					}
+				},
+				{
+					"name": "Get All Workshop Curriculums",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "{{BASE_URL}}/workshop-curriculum/all?page=1&limit=10&workshopId=WORKSHOP_ID_HERE&search=react&startDate=2024-01-01&endDate=2024-12-31",
+							"host": ["{{BASE_URL}}"],
+							"path": ["workshop-curriculum", "all"],
+							"query": [
+								{"key": "page", "value": "1"},
+								{"key": "limit", "value": "10"},
+								{"key": "workshopId", "value": "WORKSHOP_ID_HERE"},
+								{"key": "search", "value": "react"},
+								{"key": "startDate", "value": "2024-01-01"},
+								{"key": "endDate", "value": "2024-12-31"}
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Workshop Curriculum By ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/workshop-curriculum/CURRICULUM_ID_HERE",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"workshop-curriculum",
+								"CURRICULUM_ID_HERE"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "apikey",
+				"apikey": [
+					{
+						"key": "value",
+						"value": "{{TOKEN}}",
+						"type": "string"
+					},
+					{
+						"key": "key",
+						"value": "authorization",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Coupon Code",
+			"item": [
+				{
+					"name": "Add Coupon Code",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "authorization",
+								"value": "{{ADMIN_TOKEN}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"title\": \"Summer Sale\",\n  \"code\": \"SUMMER2024\",\n  \"discountType\": \"percentage\",\n  \"discountValue\": 20,\n  \"minOrderAmount\": 100,\n  \"maxDiscountAmount\": 500,\n  \"startDate\": \"2024-06-01\",\n  \"endDate\": \"2024-08-31\",\n  \"usageLimit\": 100,\n  \"appliesTo\": \"all\",\n  \"status\": \"active\"\n}"
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/coupon-code/add",
+							"host": ["{{BASE_URL}}"],
+							"path": ["coupon-code", "add"]
+						}
+					}
+				},
+				{
+					"name": "Update Coupon Code",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "authorization",
+								"value": "{{ADMIN_TOKEN}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"couponCodeId\": \"COUPON_ID_HERE\",\n  \"title\": \"Updated Summer Sale\",\n  \"discountValue\": 25\n}"
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/coupon-code/edit",
+							"host": ["{{BASE_URL}}"],
+							"path": ["coupon-code", "edit"]
+						}
+					}
+				},
+				{
+					"name": "Delete Coupon Code",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{ADMIN_TOKEN}}"
+							}
+						],
+						"url": {
+							"raw": "{{BASE_URL}}/coupon-code/delete/COUPON_ID_HERE",
+							"host": ["{{BASE_URL}}"],
+							"path": ["coupon-code", "delete", "COUPON_ID_HERE"]
+						}
+					}
+				},
+				{
+					"name": "Get All Coupon Codes",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{ADMIN_TOKEN}}"
+							}
+						],
+						"url": {
+							"raw": "{{BASE_URL}}/coupon-code/all?page=1&limit=10&search=summer&status=active&startDate=2024-01-01&endDate=2024-12-31",
+							"host": ["{{BASE_URL}}"],
+							"path": ["coupon-code", "all"],
+							"query": [
+								{"key": "page", "value": "1"},
+								{"key": "limit", "value": "10"},
+								{"key": "search", "value": "summer"},
+								{"key": "status", "value": "active"},
+								{"key": "startDate", "value": "2024-01-01"},
+								{"key": "endDate", "value": "2024-12-31"}
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Coupon Code By ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{ADMIN_TOKEN}}"
+							}
+						],
+						"url": {
+							"raw": "{{BASE_URL}}/coupon-code/COUPON_ID_HERE",
+							"host": ["{{BASE_URL}}"],
+							"path": ["coupon-code", "COUPON_ID_HERE"]
+						}
+					}
+				},
+				{
+					"name": "Validate Coupon Code",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "authorization",
+								"value": "{{USER_TOKEN}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"code\": \"SUMMER2024\",\n  \"amount\": 500,\n  \"appliesToId\": \"COURSE_ID_HERE\"\n}"
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/coupon-code/validate",
+							"host": ["{{BASE_URL}}"],
+							"path": ["coupon-code", "validate"]
+						}
+					}
+				}
+			],
+			"auth": {
+				"type": "apikey",
+				"apikey": [
+					{
+						"key": "value",
+						"value": "{{TOKEN}}",
+						"type": "string"
+					},
+					{
+						"key": "key",
+						"value": "authorization",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Referral Code",
+			"item": [
+				{
+					"name": "Add Referral Code",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "authorization",
+								"value": "{{ADMIN_TOKEN}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"code\": \"REF2024\",\n  \"userId\": \"USER_ID_HERE\",\n  \"rewardType\": \"percentage\",\n  \"rewardValue\": 10,\n  \"minOrderAmount\": 100,\n  \"maxRewardAmount\": 500,\n  \"startDate\": \"2024-01-01\",\n  \"endDate\": \"2024-12-31\",\n  \"usageLimit\": 100,\n  \"status\": \"active\"\n}"
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/referral-code/add",
+							"host": ["{{BASE_URL}}"],
+							"path": ["referral-code", "add"]
+						}
+					}
+				},
+				{
+					"name": "Update Referral Code",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "authorization",
+								"value": "{{ADMIN_TOKEN}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"referralCodeId\": \"REFERRAL_CODE_ID_HERE\",\n  \"code\": \"REF2024UPDATED\",\n  \"rewardValue\": 15\n}"
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/referral-code/edit",
+							"host": ["{{BASE_URL}}"],
+							"path": ["referral-code", "edit"]
+						}
+					}
+				},
+				{
+					"name": "Delete Referral Code",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{ADMIN_TOKEN}}"
+							}
+						],
+						"url": {
+							"raw": "{{BASE_URL}}/referral-code/delete/REFERRAL_CODE_ID_HERE",
+							"host": ["{{BASE_URL}}"],
+							"path": ["referral-code", "delete", "REFERRAL_CODE_ID_HERE"]
+						}
+					}
+				},
+				{
+					"name": "Get All Referral Codes",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{ADMIN_TOKEN}}"
+							}
+						],
+						"url": {
+							"raw": "{{BASE_URL}}/referral-code/all?page=1&limit=10&search=REF&statusFilter=active&userIdFilter=USER_ID_HERE&startDateFilter=2024-01-01&endDateFilter=2024-12-31",
+							"host": ["{{BASE_URL}}"],
+							"path": ["referral-code", "all"],
+							"query": [
+								{"key": "page", "value": "1"},
+								{"key": "limit", "value": "10"},
+								{"key": "search", "value": "REF"},
+								{"key": "statusFilter", "value": "active"},
+								{"key": "userIdFilter", "value": "USER_ID_HERE"},
+								{"key": "startDateFilter", "value": "2024-01-01"},
+								{"key": "endDateFilter", "value": "2024-12-31"}
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Referral Code By ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{ADMIN_TOKEN}}"
+							}
+						],
+						"url": {
+							"raw": "{{BASE_URL}}/referral-code/REFERRAL_CODE_ID_HERE",
+							"host": ["{{BASE_URL}}"],
+							"path": ["referral-code", "REFERRAL_CODE_ID_HERE"]
+						}
+					}
+				},
+				{
+					"name": "Validate Referral Code (With Amount)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "authorization",
+								"value": "{{USER_TOKEN}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"code\": \"REF2024\",\n  \"amount\": 500\n}"
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/referral-code/validate",
+							"host": ["{{BASE_URL}}"],
+							"path": ["referral-code", "validate"]
+						}
+					}
+				},
+				{
+					"name": "Validate Referral Code (Without Amount)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "authorization",
+								"value": "{{USER_TOKEN}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"code\": \"REF2024\"\n}"
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/referral-code/validate",
+							"host": ["{{BASE_URL}}"],
+							"path": ["referral-code", "validate"]
+						}
+					}
+				}
+			],
+			"auth": {
+				"type": "apikey",
+				"apikey": [
+					{
+						"key": "value",
+						"value": "{{TOKEN}}",
+						"type": "string"
+					},
+					{
+						"key": "key",
+						"value": "authorization",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Course Lesson",
+			"item": [
+				{
+					"name": "Add Course Lesson",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "authorization",
+								"value": "{{ADMIN_TOKEN}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"courseId\": \"COURSE_ID_HERE\",\n  \"title\": \"Introduction to React\",\n  \"subtitle\": \"Learn the basics\",\n  \"lessonLock\": false\n}"
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/course-lesson/add",
+							"host": ["{{BASE_URL}}"],
+							"path": ["course-lesson", "add"]
+						}
+					}
+				},
+				{
+					"name": "Update Course Lesson",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "authorization",
+								"value": "{{ADMIN_TOKEN}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"courseLessonId\": \"LESSON_ID_HERE\",\n  \"title\": \"Updated Lesson Title\",\n  \"lessonLock\": true\n}"
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/course-lesson/edit",
+							"host": ["{{BASE_URL}}"],
+							"path": ["course-lesson", "edit"]
+						}
+					}
+				},
+				{
+					"name": "Delete Course Lesson",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{ADMIN_TOKEN}}"
+							}
+						],
+						"url": {
+							"raw": "{{BASE_URL}}/course-lesson/delete/LESSON_ID_HERE",
+							"host": ["{{BASE_URL}}"],
+							"path": ["course-lesson", "delete", "LESSON_ID_HERE"]
+						}
+					}
+				},
+				{
+					"name": "Get All Course Lessons",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "{{BASE_URL}}/course-lesson/all?page=1&limit=10&courseId=COURSE_ID_HERE&search=react&startDate=2024-01-01&endDate=2024-12-31",
+							"host": ["{{BASE_URL}}"],
+							"path": ["course-lesson", "all"],
+							"query": [
+								{"key": "page", "value": "1"},
+								{"key": "limit", "value": "10"},
+								{"key": "courseId", "value": "COURSE_ID_HERE"},
+								{"key": "search", "value": "react"},
+								{"key": "startDate", "value": "2024-01-01"},
+								{"key": "endDate", "value": "2024-12-31"}
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Course Lesson By ID",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "{{BASE_URL}}/course-lesson/LESSON_ID_HERE",
+							"host": ["{{BASE_URL}}"],
+							"path": ["course-lesson", "LESSON_ID_HERE"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Course Curriculum",
+			"item": [
+				{
+					"name": "Add Course Curriculum",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "authorization",
+								"value": "{{ADMIN_TOKEN}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"courseId\": \"COURSE_ID_HERE\",\n  \"date\": \"2024-12-01\",\n  \"thumbnail\": \"https://example.com/thumb.jpg\",\n  \"videoLink\": \"https://example.com/video.mp4\",\n  \"title\": \"Introduction to React\",\n  \"description\": \"Learn the basics\",\n  \"duration\": \"2 hours\",\n  \"attachment\": \"https://example.com/notes.pdf\",\n  \"courseLessonsAssigned\": [\"LESSON_ID_1\", \"LESSON_ID_2\"],\n  \"courseLessonsPriority\": 1\n}"
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/course-curriculum/add",
+							"host": ["{{BASE_URL}}"],
+							"path": ["course-curriculum", "add"]
+						}
+					}
+				},
+				{
+					"name": "Update Course Curriculum",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "authorization",
+								"value": "{{ADMIN_TOKEN}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"courseCurriculumId\": \"CURRICULUM_ID_HERE\",\n  \"title\": \"Updated Title\",\n  \"duration\": \"3 hours\"\n}"
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/course-curriculum/edit",
+							"host": ["{{BASE_URL}}"],
+							"path": ["course-curriculum", "edit"]
+						}
+					}
+				},
+				{
+					"name": "Delete Course Curriculum",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{ADMIN_TOKEN}}"
+							}
+						],
+						"url": {
+							"raw": "{{BASE_URL}}/course-curriculum/delete/CURRICULUM_ID_HERE",
+							"host": ["{{BASE_URL}}"],
+							"path": ["course-curriculum", "delete", "CURRICULUM_ID_HERE"]
+						}
+					}
+				},
+				{
+					"name": "Get All Course Curriculums",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "{{BASE_URL}}/course-curriculum/all?page=1&limit=10&courseId=COURSE_ID_HERE&search=react&startDate=2024-01-01&endDate=2024-12-31",
+							"host": ["{{BASE_URL}}"],
+							"path": ["course-curriculum", "all"],
+							"query": [
+								{"key": "page", "value": "1"},
+								{"key": "limit", "value": "10"},
+								{"key": "courseId", "value": "COURSE_ID_HERE"},
+								{"key": "search", "value": "react"},
+								{"key": "startDate", "value": "2024-01-01"},
+								{"key": "endDate", "value": "2024-12-31"}
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Course Curriculum By ID",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "{{BASE_URL}}/course-curriculum/CURRICULUM_ID_HERE",
+							"host": ["{{BASE_URL}}"],
+							"path": ["course-curriculum", "CURRICULUM_ID_HERE"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Instructor",
+			"item": [
+				{
+					"name": "Add Instructor",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "authorization",
+								"value": "{{ADMIN_TOKEN}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"image\": \"https://example.com/instructor.jpg\",\n  \"name\": \"John Doe\",\n  \"designation\": \"Senior Developer\",\n  \"linkedin\": \"https://linkedin.com/in/johndoe\",\n  \"instagram\": \"https://instagram.com/johndoe\",\n  \"facebook\": \"https://facebook.com/johndoe\",\n  \"twitter\": \"https://twitter.com/johndoe\"\n}"
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/instructor/add",
+							"host": ["{{BASE_URL}}"],
+							"path": ["instructor", "add"]
+						}
+					}
+				},
+				{
+					"name": "Update Instructor",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "authorization",
+								"value": "{{ADMIN_TOKEN}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"instructorId\": \"INSTRUCTOR_ID_HERE\",\n  \"name\": \"John Doe Updated\",\n  \"designation\": \"Lead Developer\"\n}"
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/instructor/edit",
+							"host": ["{{BASE_URL}}"],
+							"path": ["instructor", "edit"]
+						}
+					}
+				},
+				{
+					"name": "Delete Instructor",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{ADMIN_TOKEN}}"
+							}
+						],
+						"url": {
+							"raw": "{{BASE_URL}}/instructor/delete/INSTRUCTOR_ID_HERE",
+							"host": ["{{BASE_URL}}"],
+							"path": ["instructor", "delete", "INSTRUCTOR_ID_HERE"]
+						}
+					}
+				},
+				{
+					"name": "Get All Instructors",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "{{BASE_URL}}/instructor/all?page=1&limit=10&search=john&startDate=2024-01-01&endDate=2024-12-31",
+							"host": ["{{BASE_URL}}"],
+							"path": ["instructor", "all"],
+							"query": [
+								{"key": "page", "value": "1"},
+								{"key": "limit", "value": "10"},
+								{"key": "search", "value": "john"},
+								{"key": "startDate", "value": "2024-01-01"},
+								{"key": "endDate", "value": "2024-12-31"}
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Instructor By ID",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "{{BASE_URL}}/instructor/INSTRUCTOR_ID_HERE",
+							"host": ["{{BASE_URL}}"],
+							"path": ["instructor", "INSTRUCTOR_ID_HERE"]
+						}
+					}
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "BASE_URL",
+			"value": ""
+		},
+		{
+			"key": "TOKEN",
+			"value": "",
+			"type": "default"
+		}
+	]
+}
+

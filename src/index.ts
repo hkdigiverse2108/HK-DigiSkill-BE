@@ -4,7 +4,7 @@
  * @description Server and REST API config
  */
 import * as bodyParser from 'body-parser';
-import express, { Request, Response } from 'express';  
+import express from 'express';  
 import http from 'http';
 import cors from 'cors'
 import { mongooseConnection} from './database'

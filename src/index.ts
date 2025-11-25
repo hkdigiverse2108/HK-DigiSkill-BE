@@ -4,26 +4,61 @@
  * @description Server and REST API config
  */
 import * as bodyParser from 'body-parser';
-import express from 'express';  
+import express from 'express';
 import http from 'http';
 import cors from 'cors'
-import { mongooseConnection} from './database'
+import { mongooseConnection } from './database'
 import * as packageInfo from '../package.json'
 import { router } from './Routes'
- 
+import path from "path"
+import multer from "multer"
+import fs from "fs"
+
 const app = express();
 
+app.use("/images", express.static(path.join(__dirname, "..", "..", "images")));
 
-app.use(cors())
-app.use(mongooseConnection)
-app.use(bodyParser.json({ limit: '200mb' }))
-app.use(bodyParser.urlencoded({ limit: '200mb', extended: true }))
+const fileStorage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        const dir = path.join(process.cwd(), "images");
+
+        if (!fs.existsSync(dir)) {
+            fs.mkdirSync(dir, { recursive: true });
+        }
+        cb(null, "images");
+    },
+    filename: (req, file, cb) => {
+        const sanitizedOriginalName = file.originalname.replace(/\s+/g, "-");
+        cb(null, `${Date.now()}_${sanitizedOriginalName}`);
+    },
+});
+
+const fileFilter = (req, file, cb) => {
+    if (
+        file.mimetype === "image/png" ||
+        file.mimetype === "image/jpg" ||
+        file.mimetype === "image/webp" ||
+        file.mimetype === "image/jpeg"
+    ) {
+        cb(null, true);
+    } else {
+        cb(null, false);
+    }
+};
+
+app.use(cors());
+app.use(mongooseConnection);
+app.use(multer({ storage: fileStorage, fileFilter }).fields([{ name: "images", maxCount: 100 }]));
+app.use(bodyParser.json({ limit: "200mb" }));
+app.use(bodyParser.urlencoded({ limit: "200mb", extended: true }));
+app.use(express.static(path.join(__dirname, "public")));
+
 const health = (req, res) => {
     return res.status(200).json({
         message: `Project Name Server is Running, Server health is green`,
         app: packageInfo.name,
         version: packageInfo.version,
-        description: packageInfo.description,   
+        description: packageInfo.description,
         author: packageInfo.author,
         license: packageInfo.license
     })

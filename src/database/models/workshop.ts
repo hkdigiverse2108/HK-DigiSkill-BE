@@ -11,7 +11,7 @@ const workshopSchema = new mongoose.Schema({
     workshopFAQ: [{ type: mongoose.Schema.Types.ObjectId, ref: 'faq' }],
     price: { type: Number, default: 0 },
     mrpPrice: { type: Number, default: 0 },
-    validFor: { type: String }, // e.g., "30 days", "1 year"
+    validFor: { type: String },
     couponCode: { type: String },
     language: { type: String },
     duration: { type: String },

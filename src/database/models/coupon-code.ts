@@ -3,14 +3,14 @@ import { COUPON_CODE_APPLIES_TO, COUPON_STATUS, DISCOUNT_TYPE } from "../../comm
 const mongoose = require('mongoose');
 
 const couponCodeSchema = new mongoose.Schema({
-    title: { type: String, required: true },
-    code: { type: String, required: true, unique: true },
-    discountType: { type: String, enum: Object.values(DISCOUNT_TYPE), required: true },
-    discountValue: { type: Number, required: true },
+    title: { type: String },
+    code: { type: String },
+    discountType: { type: String, enum: Object.values(DISCOUNT_TYPE) },
+    discountValue: { type: Number },
     minOrderAmount: { type: Number, default: 0 },
     maxDiscountAmount: { type: Number },
-    startDate: { type: Date, required: true },
-    endDate: { type: Date, required: true },
+    startDate: { type: Date },
+    endDate: { type: Date },
     usageLimit: { type: Number, default: null },
     usedCount: { type: Number, default: 0 },
     appliesTo: { type: String, enum: Object.values(COUPON_CODE_APPLIES_TO), default: COUPON_CODE_APPLIES_TO.DEFAULT },

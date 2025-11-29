@@ -1,6 +1,6 @@
 import { apiResponse } from "../../common";
 import { courseCurriculumModel } from "../../database";
-import { countData, createData, findAllWithPopulate, getFirstMatch, reqInfo, responseMessage, updateData } from "../../helper";
+import { countData, createData, reqInfo, responseMessage, updateData } from "../../helper";
 import { addCourseCurriculumSchema, editCourseCurriculumSchema, deleteCourseCurriculumSchema, getCourseCurriculumSchema } from "../../validation";
 
 const ObjectId = require('mongoose').Types.ObjectId;

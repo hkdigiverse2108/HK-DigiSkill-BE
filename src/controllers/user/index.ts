@@ -1,6 +1,6 @@
 import { apiResponse, generateHash, getUniqueOtp, USER_ROLES } from "../../common";
-import { userModel } from "../../database";
-import { countData, createData, email_verification_mail, getDataWithSorting, getFirstMatch, reqInfo, responseMessage, updateData } from "../../helper";
+import { userAccountDeletionModel, userModel } from "../../database";
+import { countData, createData, email_verification_mail, findAllWithPopulate, getDataWithSorting, getFirstMatch, reqInfo, responseMessage, updateData } from "../../helper";
 import { addUserSchema, editUserSchema, deleteUserSchema, getUserSchema } from "../../validation";
 
 const ObjectId = require('mongoose').Types.ObjectId;
@@ -68,7 +68,7 @@ export const delete_user_by_id = async (req, res) => {
 export const get_all_user = async (req, res) => {
     reqInfo(req)
     try {
-        const { page, limit, search, startDate, endDate, activeFilter } = req.query
+        const { page, limit, search, startDate, endDate, activeFilter, deleteFilter } = req.query
         let criteria: any = { isDeleted: false }, options: any = { lean: true }
 
         if (search) {
@@ -82,6 +82,8 @@ export const get_all_user = async (req, res) => {
         criteria.role = USER_ROLES.USER
 
         if (activeFilter !== undefined) criteria.isBlocked = activeFilter === 'true'
+
+        if (deleteFilter) criteria.isDeleted = Boolean(deleteFilter)
 
         if (startDate && endDate) criteria.createdAt = { $gte: new Date(startDate), $lte: new Date(endDate) }
 
@@ -124,3 +126,45 @@ export const get_user_by_id = async (req, res) => {
     }
 }
 
+
+export const get_all_delete_user = async (req, res) => {
+    reqInfo(req)
+    try {
+        const { page, limit, search, startDate, endDate } = req.query
+        let criteria: any = { isDeleted: false }, options: any = { lean: true }
+
+        if (search) {
+            criteria.$or = [
+                { fullName: { $regex: search, $options: 'si' } }
+            ]
+        }
+
+        if (startDate && endDate) criteria.createdAt = { $gte: new Date(startDate), $lte: new Date(endDate) }
+
+        options.sort = { createdAt: -1 }
+        if (page && limit) {
+            options.skip = (parseInt(page) - 1) * parseInt(limit)
+            options.limit = parseInt(limit)
+        }
+
+        let populateModel = [{ path: "userId" }]
+
+        const response = await findAllWithPopulate(userAccountDeletionModel, criteria, {}, options, populateModel)
+        const totalCount = await countData(userAccountDeletionModel, criteria)
+
+        const stateObj = {
+            page: parseInt(page) || 1,
+            limit: parseInt(limit) || totalCount,
+            page_limit: Math.ceil(totalCount / (parseInt(limit) || totalCount)) || 1,
+        }
+
+        return res.status(200).json(new apiResponse(200, responseMessage.getDataSuccess('user'), {
+            user_delete_data: response,
+            totalData: totalCount,
+            state: stateObj
+        }, {}))
+    } catch (error) {
+        console.log(error)
+        return res.status(500).json(new apiResponse(500, responseMessage?.internalServerError, {}, error))
+    }
+}

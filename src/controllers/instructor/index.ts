@@ -1,6 +1,6 @@
 import { apiResponse } from "../../common";
 import { instructorModel } from "../../database";
-import { countData, createData, findAllWithPopulate, getFirstMatch, reqInfo, responseMessage, updateData } from "../../helper";
+import { countData, createData, getDataWithSorting, getFirstMatch, reqInfo, responseMessage, updateData } from "../../helper";
 import { addInstructorSchema, editInstructorSchema, deleteInstructorSchema, getInstructorSchema } from "../../validation";
 
 const ObjectId = require('mongoose').Types.ObjectId;
@@ -70,14 +70,18 @@ export const get_all_instructors = async (req, res) => {
             options.limit = parseInt(limit)
         }
 
-        const response = await findAllWithPopulate(instructorModel, criteria, {}, options, {})
+        const response = await getDataWithSorting(instructorModel, criteria, {}, options)
         const totalCount = await countData(instructorModel, criteria)
         const stateObj = {
             page: parseInt(page) || 1,
             limit: parseInt(limit) || totalCount,
             page_limit: Math.ceil(totalCount / (parseInt(limit) || totalCount)) || 1,
         }
-        return res.status(200).json(new apiResponse(200, responseMessage.getDataSuccess('instructors'), { instructor_data: response, totalData: totalCount, state: stateObj }, {}))
+        return res.status(200).json(new apiResponse(200, responseMessage.getDataSuccess('instructors'), { 
+            instructor_data: response, 
+            totalData: totalCount, 
+            state: stateObj 
+        }, {}))
     } catch (error) {
         console.log(error)
         return res.status(500).json(new apiResponse(500, responseMessage?.internalServerError, {}, error))

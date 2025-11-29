@@ -1,6 +1,6 @@
 import { apiResponse, USER_ROLES } from "../../common";
-import { workshopModel, workshopPaymentModel } from "../../database";
-import { countData, createData, findAllWithPopulate, getFirstMatch, reqInfo, responseMessage, updateData } from "../../helper";
+import { userModel, workshopModel, workshopPaymentModel } from "../../database";
+import { countData, createData, findAllWithPopulate, findAllWithPopulateWithSorting, findOneAndPopulate, getFirstMatch, reqInfo, responseMessage, updateData } from "../../helper";
 import { addWorkshopSchema, editWorkshopSchema, deleteWorkshopSchema, getWorkshopSchema, purchaseWorkshopSchema } from "../../validation";
 
 const ObjectId = require('mongoose').Types.ObjectId;
@@ -51,6 +51,7 @@ export const delete_workshop_by_id = async (req, res) => {
 
 export const get_all_workshop = async (req, res) => {
     reqInfo(req)
+    let { user } = req.headers
     try {
         const { page, limit, search, startDate, endDate } = req.query
         let criteria: any = { isDeleted: false }, options: any = { lean: true }
@@ -71,18 +72,35 @@ export const get_all_workshop = async (req, res) => {
             options.limit = parseInt(limit)
         }
 
-        const response = await workshopModel.find(criteria, {}, options)
-            .populate({ path: 'workshopCurriculum', select: 'title date thumbnail videoLink duration' })
-            .populate({ path: 'workshopTestimonials', select: 'name designation rate description image' })
-            .populate({ path: 'workshopFAQ', select: 'question answer' })
-            .lean()
+        let populateModel = [
+            { path: 'workshopCurriculum', select: 'title date thumbnail videoLink duration' },
+            { path: 'workshopTestimonials', select: 'name designation rate description image' },
+            { path: 'workshopFAQ', select: 'question answer' }
+        ]
+
+        const workshops = await findAllWithPopulateWithSorting(workshopModel, criteria, {}, options, populateModel)
+
         const totalCount = await countData(workshopModel, criteria)
+
+        const unlockedSet = new Set(
+            (user?.workshopIds || []).map((id) => id.toString())
+        );
+
+        const response = workshops.map((w) => ({
+            ...w,
+            isUnlocked: unlockedSet.has(w._id.toString()),
+        }));
+
         const stateObj = {
             page: parseInt(page) || 1,
             limit: parseInt(limit) || totalCount,
             page_limit: Math.ceil(totalCount / (parseInt(limit) || totalCount)) || 1,
         }
-        return res.status(200).json(new apiResponse(200, responseMessage.getDataSuccess('workshop'), { workshop_data: response, totalData: totalCount, state: stateObj }, {}))
+        return res.status(200).json(new apiResponse(200, responseMessage.getDataSuccess('workshop'), {
+            workshop_data: response,
+            totalData: totalCount,
+            state: stateObj
+        }, {}))
     } catch (error) {
         console.log(error)
         return res.status(500).json(new apiResponse(500, responseMessage?.internalServerError, {}, error))
@@ -91,6 +109,7 @@ export const get_all_workshop = async (req, res) => {
 
 export const get_workshop_by_id = async (req, res) => {
     reqInfo(req)
+    let { user } = req.headers
     try {
         const { error, value } = getWorkshopSchema.validate(req.params)
         if (error) return res.status(501).json(new apiResponse(501, error?.details[0]?.message, {}, {}))
@@ -100,9 +119,14 @@ export const get_workshop_by_id = async (req, res) => {
             { path: 'workshopTestimonials', select: 'name designation rate description image' },
             { path: 'workshopFAQ', select: 'question answer' }
         ];
-
-        const response = await workshopModel.findById(value.id).populate(populateModels).lean()
+        
+        const response = await findOneAndPopulate(workshopModel, { _id: new ObjectId(value.id), isDeleted: false }, {}, {}, populateModels)
         if (!response || response.isDeleted) return res.status(404).json(new apiResponse(404, responseMessage?.getDataNotFound("workshop"), {}, {}))
+        response.isUnlocked = false
+        if (user && user?._id) {
+            let isExist = await userModel.findOne({ _id: new ObjectId(user._id), workshopIds: { $in: [new ObjectId(value.id)] }, isDeleted: false }).lean()
+            if (isExist) response.isUnlocked = true
+        }
         return res.status(200).json(new apiResponse(200, responseMessage?.getDataSuccess("workshop"), response, {}))
     } catch (error) {
         console.log(error)

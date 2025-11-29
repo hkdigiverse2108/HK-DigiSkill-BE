@@ -51,6 +51,7 @@ export const delete_course_by_id = async (req, res) => {
 
 export const get_all_course = async (req, res) => {
     reqInfo(req)
+    let { user } = req.headers
     try {
         const { page, limit, search, startDate, endDate, courseCategoryId } = req.query
         let criteria: any = { isDeleted: false }, options: any = { lean: true }
@@ -73,7 +74,10 @@ export const get_all_course = async (req, res) => {
             options.limit = parseInt(limit)
         }
 
-        const populateModel = { path: 'courseCategoryId', select: 'name description' };
+        const populateModel = [
+            { path: 'courseCategoryId', select: 'name description' },
+            { path: 'courseCurriculumIds' }
+        ];
         const response = await findAllWithPopulate(courseModel, criteria, {}, options, populateModel)
         const totalCount = await countData(courseModel, criteria)
         const stateObj = {
@@ -81,7 +85,11 @@ export const get_all_course = async (req, res) => {
             limit: parseInt(limit) || totalCount,
             page_limit: Math.ceil(totalCount / (parseInt(limit) || totalCount)) || 1,
         }
-        return res.status(200).json(new apiResponse(200, responseMessage.getDataSuccess('course'), { course_data: response, totalData: totalCount, state: stateObj }, {}))
+        return res.status(200).json(new apiResponse(200, responseMessage.getDataSuccess('course'), { 
+            course_data: response, 
+            totalData: totalCount, 
+            state: stateObj 
+        }, {}))
     } catch (error) {
         console.log(error)
         return res.status(500).json(new apiResponse(500, responseMessage?.internalServerError, {}, error))

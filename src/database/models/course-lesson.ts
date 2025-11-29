@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 
 const courseLessonSchema = new mongoose.Schema({
-    courseId: { type: mongoose.Schema.Types.ObjectId, ref: 'course', required: true },
-    title: { type: String, required: true },
+    courseId: { type: mongoose.Schema.Types.ObjectId, ref: 'course' },
+    title: { type: String },
     subtitle: { type: String },
     lessonLock: { type: Boolean, default: false },
     isDeleted: { type: Boolean, default: false },
@@ -10,4 +10,3 @@ const courseLessonSchema = new mongoose.Schema({
 }, { timestamps: true, versionKey: false });
 
 export const courseLessonModel = mongoose.model('course-lesson', courseLessonSchema);
-

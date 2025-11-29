@@ -4,7 +4,7 @@ import { Request, Response } from 'express'
 import { userModel, userAccountDeletionModel } from '../../database'
 import { apiResponse, generateHash, generateToken, getUniqueOtp, USER_ROLES } from '../../common'
 import { createData, email_verification_mail, getFirstMatch, reqInfo, responseMessage, updateData } from '../../helper'
-import { forgotPasswordSchema, otpVerifySchema, resetPasswordSchema, signUpSchema, changePasswordSchema, updateProfileSchema, deleteUserAccountSchema } from '../../validation'
+import { forgotPasswordSchema, otpVerifySchema, resetPasswordSchema, signUpSchema, changePasswordSchema, updateProfileSchema, deleteUserAccountSchema, resendOTPSchema } from '../../validation'
 
 const ObjectId = require('mongoose').Types.ObjectId
 
@@ -184,7 +184,7 @@ export const reset_password = async (req, res) => {
 export const resend_otp = async (req, res) => {
     reqInfo(req);
     try {
-        const { error, value } = resetPasswordSchema.validate(req.body)
+        const { error, value } = resendOTPSchema.validate(req.body)
         if (error) return res.status(501).json(new apiResponse(501, error?.details[0]?.message, {}, {}));
 
         const admin = await getFirstMatch(userModel, { email: value.email, isDeleted: false }, {}, {});

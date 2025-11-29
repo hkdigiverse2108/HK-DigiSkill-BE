@@ -15,6 +15,8 @@ const userSchema: any = new mongoose.Schema({
     otp: { type: Number, default: null },
     otpExpireTime: { type: Date, default: null },
     isEmailVerified: { type: Boolean, default: false },
+    workshopIds: [{ type: mongoose.Schema.Types.ObjectId, ref: 'workshop' }],
+    courseIds: [{ type: mongoose.Schema.Types.ObjectId, ref: 'course' }],
     isDeleted: { type: Boolean, default: false },
     isBlocked: { type: Boolean, default: false },
 }, { timestamps: true, versionKey: false })

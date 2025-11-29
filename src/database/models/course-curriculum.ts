@@ -2,7 +2,6 @@ const mongoose = require('mongoose');
 
 const courseCurriculumSchema = new mongoose.Schema({
     courseId: { type: mongoose.Schema.Types.ObjectId, ref: 'course' },
-    courseLessonId: { type: mongoose.Schema.Types.ObjectId, ref: 'course-lesson' },
     date: { type: Date },
     thumbnail: { type: String },
     videoLink: { type: String },

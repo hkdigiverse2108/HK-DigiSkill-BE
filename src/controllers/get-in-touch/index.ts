@@ -82,7 +82,11 @@ export const get_all_get_in_touch = async (req, res) => {
             limit: parseInt(limit) || totalCount,
             page_limit: Math.ceil(totalCount / (parseInt(limit) || totalCount)) || 1,
         }
-        return res.status(200).json(new apiResponse(200, responseMessage.getDataSuccess('contact messages'), { contact_messages_data: response, totalData: totalCount, state: stateObj }, {}))
+        return res.status(200).json(new apiResponse(200, responseMessage.getDataSuccess('contact messages'), { 
+            contact_messages_data: response, 
+            totalData: totalCount,
+            state: stateObj 
+        }, {}))
     } catch (error) {
         console.log(error)
         return res.status(500).json(new apiResponse(500, responseMessage?.internalServerError, {}, error))

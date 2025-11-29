@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const courseSchema = new mongoose.Schema({
     name: { type: String, required: true },
     courseCategoryId: { type: mongoose.Schema.Types.ObjectId, ref: 'course-category' },
+    courseCurriculumIds: [{ type: mongoose.Schema.Types.ObjectId, ref: 'course-curriculum' }],
     description: { type: String },
     price: { type: Number, default: 0 },
     image: { type: String },
@@ -15,4 +16,3 @@ const courseSchema = new mongoose.Schema({
 }, { timestamps: true, versionKey: false });
 
 export const courseModel = mongoose.model('course', courseSchema);
-

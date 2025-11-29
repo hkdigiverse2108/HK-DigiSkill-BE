@@ -20,6 +20,10 @@ export const resetPasswordSchema = Joi.object().keys({
     newPassword: Joi.string().required(),
 });
 
+export const resendOTPSchema = Joi.object().keys({
+    email: Joi.string().email().required(),
+});
+
 export const otpVerifySchema = Joi.object().keys({
     email: Joi.string().email().required(),
     otp: Joi.string().pattern(/^\d{6}$/).required(),

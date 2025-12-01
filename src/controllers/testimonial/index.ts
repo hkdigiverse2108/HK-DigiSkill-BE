@@ -52,7 +52,7 @@ export const delete_testimonial_by_id = async (req, res) => {
 export const get_all_testimonial = async (req, res) => {
     reqInfo(req)
     try {
-        const { page, limit, search, startDate, endDate, type, isFeatured } = req.query
+        const { page, limit, search, startDate, endDate, type, isFeatured, learningCatalogFilter } = req.query
         let criteria: any = { isDeleted: false }, options: any = { lean: true }
 
         if (search) {
@@ -65,6 +65,11 @@ export const get_all_testimonial = async (req, res) => {
         if (type) {
             criteria.type = type
         }
+
+        if(learningCatalogFilter){
+            criteria.learningCatalogId = new ObjectId(learningCatalogFilter)
+        }
+        
         if (isFeatured !== undefined) {
             criteria.isFeatured = isFeatured === 'true'
         }

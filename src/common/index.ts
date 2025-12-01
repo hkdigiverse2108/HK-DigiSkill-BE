@@ -58,7 +58,7 @@ export const generateToken = (data = {}, expiresIn = {}) => {
     return token
 }
 
-export const TESTIMONIAL_STATUS = {
+export const TESTIMONIAL_TYPE = {
     HOME: "home",
     WORKSHOP: "workshop",
     COURSE: "course",

@@ -115,3 +115,15 @@ export const REFERRAL_REWARD_TYPE = {
     PERCENTAGE: "percentage",
     FLAT: "flat",
 }
+
+export const MEDIA_CATEGORY = {
+    BLOG: "blog",
+    CATEGORY: "category",
+    WORKSHOP: "workshop",
+    PARTNER: "partner",
+    BANNER: "banner",
+    COURSE: "course",
+    GALLERY: "gallery",
+    CURRICULUM: "curriculum",
+    INSTRUCTORS: "instructors",
+}

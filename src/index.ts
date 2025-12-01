@@ -28,7 +28,7 @@ const health = (req, res) => {
         license: packageInfo.license
     })
 }
-const bad_gateway = (req, res) => { return res.status(502).json({ status: 502, message: "Project Name Backend API Bad Gateway" }) }
+const bad_gateway = (req, res) => { return res.status(502).json({ status: 502, message: "HK DigiSkill Name Backend API Bad Gateway" }) }
 
 app.get('/', health);
 app.get('/health', health);

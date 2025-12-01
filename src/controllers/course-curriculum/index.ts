@@ -90,7 +90,6 @@ export const get_all_course_curriculums = async (req, res) => {
 
         const populateModel = [
             { path: 'courseId', select: 'name description' },
-            { path: 'courseLessonId', select: 'title subtitle' },
             { path: 'courseLessonsAssigned', select: 'title subtitle' }
         ];
         const response = await courseCurriculumModel.find(criteria, {}, options).populate(populateModel).lean()

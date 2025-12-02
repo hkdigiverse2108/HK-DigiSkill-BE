@@ -441,7 +441,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{BASE_URL}}/user/all?page=1&limit=10",
+							"raw": "{{BASE_URL}}/user/all?page=1&limit=10&deleteFilter=true",
 							"host": [
 								"{{BASE_URL}}"
 							],
@@ -480,6 +480,69 @@
 								},
 								{
 									"key": "activeFilter",
+									"value": "true",
+									"disabled": true
+								},
+								{
+									"key": "deleteFilter",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Delete User",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/user/delete/all?page=1&limit=10",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"user",
+								"delete",
+								"all"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								},
+								{
+									"key": "search",
+									"value": "john",
+									"disabled": true
+								},
+								{
+									"key": "roleFilter",
+									"value": "user",
+									"disabled": true
+								},
+								{
+									"key": "startDate",
+									"value": "2024-01-01",
+									"disabled": true
+								},
+								{
+									"key": "endDate",
+									"value": "2024-12-31",
+									"disabled": true
+								},
+								{
+									"key": "activeFilter",
+									"value": "true",
+									"disabled": true
+								},
+								{
+									"key": "deleteFilter",
 									"value": "true",
 									"disabled": true
 								}
@@ -942,7 +1005,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"courseName\": \"React Masterclass\",\n  \"courseCategoryId\": \"CATEGORY_ID_HERE\",\n  \"description\": \"Learn React from scratch\",\n  \"price\": 99.99,\n  \"image\": \"https://example.com/course.jpg\",\n  \"purchasedCoursesShow\": true,\n  \"enrolledLearners\": 0,\n  \"classCompleted\": 0,\n  \"satisfactionRate\": 0\n}"
+							"raw": "{\n    \"courseName\": \"React Masterclass\",\n    \"courseCategoryId\": \"CATEGORY_ID_HERE\",\n    \"description\": \"Learn React from scratch\",\n    \"price\": 99.99,\n    \"image\": \"https://example.com/course.jpg\",\n    \"purchasedCoursesShow\": true,\n    \"enrolledLearners\": 0,\n    \"classCompleted\": 0,\n    \"satisfactionRate\": 0,\n    \"courseCurriculumIds\": [\"\"]\n}"
 						},
 						"url": {
 							"raw": "{{BASE_URL}}/course/add",
@@ -4105,7 +4168,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{BASE_URL}}/instructor/all?page=1&limit=10&search=john&startDate=2024-01-01&endDate=2024-12-31",
+							"raw": "{{BASE_URL}}/instructor/all",
 							"host": [
 								"{{BASE_URL}}"
 							],
@@ -4116,23 +4179,28 @@
 							"query": [
 								{
 									"key": "page",
-									"value": "1"
+									"value": "1",
+									"disabled": true
 								},
 								{
 									"key": "limit",
-									"value": "10"
+									"value": "10",
+									"disabled": true
 								},
 								{
 									"key": "search",
-									"value": "john"
+									"value": "john",
+									"disabled": true
 								},
 								{
 									"key": "startDate",
-									"value": "2024-01-01"
+									"value": "2024-01-01",
+									"disabled": true
 								},
 								{
 									"key": "endDate",
-									"value": "2024-12-31"
+									"value": "2024-12-31",
+									"disabled": true
 								}
 							]
 						}
@@ -4217,12 +4285,14 @@
 								{
 									"key": "images",
 									"type": "file",
-									"src": "/C:/Users/admin/Downloads/0.10.jpg"
+									"src": "/C:/Users/admin/Downloads/0.10.jpg",
+									"disabled": true
 								},
 								{
 									"key": "category",
 									"value": "blog",
-									"type": "text"
+									"type": "text",
+									"disabled": true
 								},
 								{
 									"key": "images",
@@ -4232,7 +4302,14 @@
 								{
 									"key": "images",
 									"type": "file",
-									"src": "/C:/Users/admin/Downloads/0.5.jpg"
+									"src": "/C:/Users/admin/Downloads/0.5.jpg",
+									"disabled": true
+								},
+								{
+									"key": "pdf",
+									"type": "file",
+									"src": "/C:/Users/admin/Downloads/pdf-test.pdf",
+									"disabled": true
 								}
 							]
 						},
@@ -4292,6 +4369,113 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Get PDF",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/upload/pdf",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"upload",
+								"pdf"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "About US",
+			"item": [
+				{
+					"name": "Add Edit About Us",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"aboutUs\": \"rdhnugifrhedio\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/about-us/add/edit",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"about-us",
+								"add",
+								"edit"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All About Us",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/about-us",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"about-us"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "apikey",
+				"apikey": [
+					{
+						"key": "value",
+						"value": "{{TOKEN}}",
+						"type": "string"
+					},
+					{
+						"key": "key",
+						"value": "authorization",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {},
+						"exec": [
+							""
+						]
+					}
 				}
 			]
 		}

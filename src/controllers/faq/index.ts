@@ -1,6 +1,6 @@
 import { apiResponse } from "../../common";
 import { faqModel } from "../../database";
-import { countData, createData, getDataWithSorting, getFirstMatch, reqInfo, responseMessage, updateData } from "../../helper";
+import { countData, createData, findAllWithPopulate, getDataWithSorting, getFirstMatch, reqInfo, responseMessage, updateData } from "../../helper";
 import { addFaqSchema, editFaqSchema, deleteFaqSchema, getFaqSchema } from "../../validation";
 
 const ObjectId = require('mongoose').Types.ObjectId;
@@ -82,7 +82,11 @@ export const get_all_faq = async (req, res) => {
             options.limit = parseInt(limit)
         }
 
-        const response = await getDataWithSorting(faqModel, criteria, {}, options)
+        let populateModel = [
+            { path: "learningCatalogId" }
+        ]
+
+        const response = await findAllWithPopulate(faqModel, criteria, {}, options, populateModel)
         const totalCount = await countData(faqModel, criteria)
         const stateObj = {
             page: parseInt(page) || 1,

@@ -1,37 +1,30 @@
+import { apiResponse } from "../../common";
 import { aboutUsModel } from "../../database/models/about_us";
-import { createData} from "../../helper/database_service";
+import { reqInfo, responseMessage } from "../../helper";
+import { addEditAboutUsSchema } from "../../validation";
 
-export const add_about_us = async (req, res) => {
+export const add_edit_about_us = async (req, res) => {
+    reqInfo(req)
     try {
-        const body = req.body;
-        const response = await createData(aboutUsModel ,body);
-        return res.status(200).json({ status: 200, message: "About Us added successfully", data: response });
-    }
-    catch (error) {
-        return res.status(500).json({ status: 500, message: "Internal Server Error", error: error.message });
-    }
-};
+        const { error, value } = addEditAboutUsSchema.validate(req.body)
+        if (error) return res.status(501).json(new apiResponse(501, error?.details[0]?.message, {}, {}))
 
-
-export const update_about_us = async (req, res) => {
-    try {
-        let { id } = req.params, body = req.body;
-        const response = await aboutUsModel.findOneAndUpdate({_id: id}, body, { new: true, lean: true });  
-        return res.status(200).json({ status: 200, message: "About Us updated successfully", data: response });
+        const response = await aboutUsModel.findOneAndUpdate({ }, value, { new: true, upsert: true })
+        return res.status(200).json(new apiResponse(200, responseMessage?.updateDataSuccess("about us"), response, {}))
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json(new apiResponse(500, responseMessage?.internalServerError, {}, error))
     }
-    catch (error) {
-        return res.status(500).json({ status: 500, message: "Internal Server Error", error: error.message });
-    }
-};
-
+}
 
 export const get_about_us = async (req, res) => {
+    reqInfo(req)
     try {
-        const response = await aboutUsModel.find({}); 
-        return res.status(200).json({ status: 200, message: "About Us get successfully", data: response });
+        const response = await aboutUsModel.findOne({ })
+        if (!response) return res.status(404).json(new apiResponse(404, responseMessage?.getDataNotFound("about us"), {}, {}))
+        return res.status(200).json(new apiResponse(200, responseMessage?.getDataSuccess("about us"), response, {}))
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json(new apiResponse(500, responseMessage?.internalServerError, {}, error))
     }
-    catch (error) {
-        return res.status(500).json({ status: 500, message: "Internal Server Error", error: error.message });
-    }
-};
-
+}

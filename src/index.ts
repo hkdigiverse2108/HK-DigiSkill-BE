@@ -17,6 +17,7 @@ import fs from "fs"
 const app = express();
 
 app.use("/images", express.static(path.join(__dirname, "..", "..", "images")));
+app.use("/pdf", express.static(path.join(__dirname, "..", "..", "pdf")));
 
 const fileStorage = multer.diskStorage({
     destination: (req, file, cb) => {

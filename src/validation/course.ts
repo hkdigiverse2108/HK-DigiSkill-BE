@@ -9,6 +9,7 @@ export const addCourseSchema = Joi.object().keys({
     image: Joi.string().allow('', null).optional(),
     purchasedCoursesShow: Joi.boolean().default(false),
     enrolledLearners: Joi.number().default(0),
+    duration: Joi.number().default(0),
     classCompleted: Joi.number().default(0),
     satisfactionRate: Joi.number().default(0),
 });
@@ -23,6 +24,7 @@ export const editCourseSchema = Joi.object().keys({
     image: Joi.string().allow('', null).optional(),
     purchasedCoursesShow: Joi.boolean().optional(),
     enrolledLearners: Joi.number().optional(),
+    duration: Joi.number().default(0),
     classCompleted: Joi.number().optional(),
     satisfactionRate: Joi.number().optional(),
 });

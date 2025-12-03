@@ -7,6 +7,7 @@ const courseSchema = new mongoose.Schema({
     description: { type: String },
     price: { type: Number, default: 0 },
     image: { type: String },
+    duration: { type: Number, default: 0 },
     purchasedCoursesShow: { type: Boolean, default: false },
     enrolledLearners: { type: Number, default: 0 },
     classCompleted: { type: Number, default: 0 },

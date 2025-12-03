@@ -164,7 +164,7 @@ export const get_my_courses = async (req, res) => {
         }
 
         const populateModel = [
-            { path: 'courseId', select: 'courseName description price image enrolledLearners classCompleted satisfactionRate' },
+            { path: 'courseId', select: 'name description price image enrolledLearners classCompleted satisfactionRate' },
             { path: 'userId', select: 'fullName email phoneNumber profilePhoto designation' },
         ];
 

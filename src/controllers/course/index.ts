@@ -1,5 +1,5 @@
 import { apiResponse, USER_ROLES } from "../../common";
-import { courseModel, userCourseModel } from "../../database";
+import { courseLessonModel, courseModel, userCourseModel } from "../../database";
 import { countData, createData, findAllWithPopulate, getFirstMatch, reqInfo, responseMessage, updateData } from "../../helper";
 import { addCourseSchema, editCourseSchema, deleteCourseSchema, getCourseSchema, purchaseCourseSchema } from "../../validation";
 
@@ -80,15 +80,26 @@ export const get_all_course = async (req, res) => {
         ];
         const response = await findAllWithPopulate(courseModel, criteria, {}, options, populateModel)
         const totalCount = await countData(courseModel, criteria)
+        
+        let newResponse: any[] = [];
+
+        for (let course of response) {
+            const totalLesson = await countData(courseLessonModel,{ courseId: course._id, isDeleted: false });
+            newResponse.push({
+                ...course,
+                totalLesson
+            });
+        }
+
         const stateObj = {
             page: parseInt(page) || 1,
             limit: parseInt(limit) || totalCount,
             page_limit: Math.ceil(totalCount / (parseInt(limit) || totalCount)) || 1,
         }
-        return res.status(200).json(new apiResponse(200, responseMessage.getDataSuccess('course'), { 
-            course_data: response, 
-            totalData: totalCount, 
-            state: stateObj 
+        return res.status(200).json(new apiResponse(200, responseMessage.getDataSuccess('course'), {
+            course_data: newResponse,
+            totalData: totalCount,
+            state: stateObj
         }, {}))
     } catch (error) {
         console.log(error)
@@ -101,7 +112,9 @@ export const get_course_by_id = async (req, res) => {
     try {
         const { error, value } = getCourseSchema.validate(req.params)
         if (error) return res.status(501).json(new apiResponse(501, error?.details[0]?.message, {}, {}))
-        const populateModel = { path: 'courseCategoryId', select: 'categoryName description' };
+        const populateModel = [
+            { path: 'courseCategoryId', select: 'name description' }
+        ];
         const response = await getFirstMatch(courseModel, { _id: new ObjectId(value.id), isDeleted: false }, {}, {})
         if (response) {
             const populatedResponse = await courseModel.findById(value.id).populate(populateModel).lean()
@@ -152,8 +165,8 @@ export const get_my_courses = async (req, res) => {
     reqInfo(req)
     let { user } = req.headers, { page, limit } = req.query, criteria: any = { isDeleted: false }, options: any = { lean: true }
     try {
-        
-        if(user?.role === USER_ROLES.USER){
+
+        if (user?.role === USER_ROLES.USER) {
             criteria.userId = new ObjectId(user._id)
         }
 

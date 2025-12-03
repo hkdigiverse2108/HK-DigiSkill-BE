@@ -6,6 +6,8 @@ const courseSchema = new mongoose.Schema({
     courseCurriculumIds: [{ type: mongoose.Schema.Types.ObjectId, ref: 'course-curriculum' }],
     description: { type: String },
     price: { type: Number, default: 0 },
+    mrpPrice: { type: Number, default: 0 },
+    language: { type: String, default: null },
     image: { type: String },
     duration: { type: Number, default: 0 },
     purchasedCoursesShow: { type: Boolean, default: false },

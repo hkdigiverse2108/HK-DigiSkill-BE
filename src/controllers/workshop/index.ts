@@ -189,7 +189,7 @@ export const get_my_workshops = async (req, res) => {
 
         let populateModel = [
             { path: 'workshopId', select: 'title subTitle image price mrpPrice language duration' },
-            { path: 'userId', select: 'fullName email phoneNumber password profilePhoto designation' }
+            { path: 'userId', select: 'fullName email phoneNumber profilePhoto designation' }
         ]
 
         const response = await findAllWithPopulate(workshopPaymentModel, criteria, {}, options, populateModel)

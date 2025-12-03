@@ -1,4 +1,4 @@
-import { apiResponse } from "../../common";
+import { apiResponse, USER_ROLES } from "../../common";
 import { courseModel, userCourseModel } from "../../database";
 import { countData, createData, findAllWithPopulate, getFirstMatch, reqInfo, responseMessage, updateData } from "../../helper";
 import { addCourseSchema, editCourseSchema, deleteCourseSchema, getCourseSchema, purchaseCourseSchema } from "../../validation";
@@ -150,12 +150,12 @@ export const purchase_course = async (req, res) => {
 
 export const get_my_courses = async (req, res) => {
     reqInfo(req)
+    let { user } = req.headers, { page, limit } = req.query, criteria: any = { isDeleted: false }, options: any = { lean: true }
     try {
-        const userId = req.headers.user?._id;
-        if (!userId) return res.status(401).json(new apiResponse(401, "User not authenticated", {}, {}))
-
-        const { page, limit } = req.query
-        let criteria: any = { userId: new ObjectId(userId), isDeleted: false }, options: any = { lean: true }
+        
+        if(user?.role === USER_ROLES.USER){
+            criteria.userId = new ObjectId(user._id)
+        }
 
         options.sort = { createdAt: -1 }
         if (page && limit) {
@@ -163,7 +163,11 @@ export const get_my_courses = async (req, res) => {
             options.limit = parseInt(limit)
         }
 
-        const populateModel = { path: 'courseId', select: 'courseName description price image enrolledLearners classCompleted satisfactionRate' };
+        const populateModel = [
+            { path: 'courseId', select: 'courseName description price image enrolledLearners classCompleted satisfactionRate' },
+            { path: 'userId', select: 'fullName, email phoneNumber profilePhoto designation' },
+        ];
+
         const response = await findAllWithPopulate(userCourseModel, criteria, {}, options, populateModel)
         const totalCount = await countData(userCourseModel, criteria)
         const stateObj = {

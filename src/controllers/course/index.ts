@@ -177,18 +177,34 @@ export const get_my_courses = async (req, res) => {
         }
 
         const populateModel = [
-            { path: 'courseId', select: 'name description price image enrolledLearners classCompleted satisfactionRate' },
+            { path: 'courseId', select: 'name description price image enrolledLearners classCompleted satisfactionRate duration' },
             { path: 'userId', select: 'fullName email phoneNumber profilePhoto designation' },
         ];
 
         const response = await findAllWithPopulate(userCourseModel, criteria, {}, options, populateModel)
         const totalCount = await countData(userCourseModel, criteria)
+
+        let newResponse: any[] = [];
+
+        for (let course of response) {
+            const totalLesson = await countData(courseLessonModel,{ courseId: course._id, isDeleted: false });
+            newResponse.push({
+                ...course,
+                totalLesson
+            });
+        }
+
         const stateObj = {
             page: parseInt(page) || 1,
             limit: parseInt(limit) || totalCount,
             page_limit: Math.ceil(totalCount / (parseInt(limit) || totalCount)) || 1,
         }
-        return res.status(200).json(new apiResponse(200, responseMessage.getDataSuccess('my courses'), { my_courses_data: response, totalData: totalCount, state: stateObj }, {}))
+
+        return res.status(200).json(new apiResponse(200, responseMessage.getDataSuccess('my courses'), { 
+            my_courses_data: newResponse, 
+            totalData: totalCount, 
+            state: stateObj 
+        }, {}))
     } catch (error) {
         console.log(error)
         return res.status(500).json(new apiResponse(500, responseMessage?.internalServerError, {}, error))

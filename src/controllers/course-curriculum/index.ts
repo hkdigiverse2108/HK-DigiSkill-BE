@@ -77,7 +77,7 @@ export const get_all_course_curriculums = async (req, res) => {
             criteria.courseId = new ObjectId(courseId)
         }
         if (courseLessonId) {
-            criteria.courseLessonId = new ObjectId(courseLessonId)
+            criteria.courseLessonsAssigned = { $in: [new ObjectId(courseLessonId)] }
         }
         if (startDate && endDate) {
             criteria.createdAt = { $gte: new Date(startDate), $lte: new Date(endDate) }

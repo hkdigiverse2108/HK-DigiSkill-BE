@@ -187,7 +187,7 @@ export const get_my_courses = async (req, res) => {
         let newResponse: any[] = [];
 
         for (let course of response) {
-            const totalLesson = await countData(courseLessonModel,{ courseId: course._id, isDeleted: false });
+            const totalLesson = await countData(courseLessonModel,{ courseId: course.courseId, isDeleted: false });
             newResponse.push({
                 ...course,
                 totalLesson

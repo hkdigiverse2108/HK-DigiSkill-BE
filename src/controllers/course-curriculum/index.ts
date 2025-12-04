@@ -114,7 +114,7 @@ export const get_course_curriculum_by_id = async (req, res) => {
         const populateModel = [
             { path: 'courseId', select: 'name description' },
             { path: 'courseLessonId', select: 'title subtitle' },
-            { path: 'courseLessonsAssigned', select: 'title subtitle' }
+            { path: 'courseLessonsAssigned', select: 'title subtitle priority' }
         ];
         const response = await courseCurriculumModel.findById(value.id).populate(populateModel).lean()
         if (!response) return res.status(404).json(new apiResponse(404, responseMessage?.getDataNotFound("course curriculum"), {}, {}))

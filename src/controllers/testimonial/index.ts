@@ -1,6 +1,6 @@
 import { apiResponse } from "../../common";
 import { testimonialModel } from "../../database";
-import { countData, createData, getDataWithSorting, getFirstMatch, reqInfo, responseMessage, updateData } from "../../helper";
+import { aggregateData, countData, createData, getDataWithSorting, getFirstMatch, reqInfo, responseMessage, updateData } from "../../helper";
 import { addTestimonialSchema, editTestimonialSchema, deleteTestimonialSchema, getTestimonialSchema } from "../../validation";
 
 const ObjectId = require('mongoose').Types.ObjectId;
@@ -114,3 +114,72 @@ export const get_testimonial_by_id = async (req, res) => {
     }
 }
 
+export const get_all_testimonial_rating = async (req, res) => {
+    reqInfo(req)
+    try {
+        const { typeFilter, learningCatalogFilter } = req.query
+        const match: any = { isDeleted: false }
+
+        if (typeFilter) {
+            match.type = typeFilter
+        }
+
+        if (learningCatalogFilter) {
+            match.learningCatalogId = new ObjectId(learningCatalogFilter)
+        }
+
+        const pipeline = [
+            { $match: match },
+            {
+                $facet: {
+                    totalTestimonials: [{ $count: "count" }],
+                    ratedTestimonials: [
+                        { $match: { rate: { $gte: 0 } } },
+                        {
+                            $group: {
+                                _id: "$rate",
+                                count: { $sum: 1 },
+                            }
+                        }
+                    ]
+                }
+            }
+        ]
+
+        const aggregation = await aggregateData(testimonialModel, pipeline)
+        const aggregatedData = aggregation?.[0] || {}
+
+        const totalTestimonials = aggregatedData?.totalTestimonials?.[0]?.count || 0
+        const ratingBuckets = aggregatedData?.ratedTestimonials || []
+
+        const totalRated = ratingBuckets.reduce((acc, bucket) => acc + (bucket?.count || 0), 0)
+        const ratingSum = ratingBuckets.reduce((acc, bucket) => acc + ((bucket?._id || 0) * (bucket?.count || 0)), 0)
+        const averageRating = totalRated ? parseFloat((ratingSum / totalRated).toFixed(2)) : 0
+
+        const ratingMap = new Map()
+        ratingBuckets.forEach(bucket => {
+            if (bucket?._id !== undefined && bucket?._id !== null) {
+                ratingMap.set(bucket._id, bucket.count)
+            }
+        })
+
+        const ratingDistribution = Array.from({ length: 6 }, (_, index) => {
+            const rateValue = 5 - index
+            return {
+                rate: rateValue,
+                count: ratingMap.get(rateValue) || 0
+            }
+        })
+
+        return res.status(200).json(new apiResponse(200, responseMessage.getDataSuccess('testimonial rating summary'), {
+            totalTestimonials,
+            totalRated,
+            unrated: totalTestimonials - totalRated,
+            averageRating,
+            ratingDistribution,
+        }, {}))
+    } catch (error) {
+        console.log(error)
+        return res.status(500).json(new apiResponse(500, responseMessage?.internalServerError, {}, error))
+    }
+}

@@ -126,4 +126,5 @@ export const MEDIA_CATEGORY = {
     GALLERY: "gallery",
     CURRICULUM: "curriculum",
     INSTRUCTORS: "instructors",
+    USER: "user",
 }

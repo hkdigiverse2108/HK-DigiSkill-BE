@@ -7,7 +7,7 @@ const workshopCurriculumSchema = new mongoose.Schema({
     videoLink: { type: String },
     title: { type: String, required: true },
     description: { type: String },
-    duration: { type: String },
+    duration: { type: Number, default: 0 },
     priority: { type: Number },
     attachment: { type: String },
     isDeleted: { type: Boolean, default: false },

@@ -8,7 +8,7 @@ export const addWorkshopCurriculumSchema = Joi.object().keys({
     title: Joi.string().required(),
     priority: Joi.number().required(),
     description: Joi.string().allow('', null).optional(),
-    duration: Joi.string().allow('', null).optional(),
+    duration: Joi.number().optional(),
     attachment: Joi.string().allow('', null).optional(),
 })
 
@@ -21,7 +21,7 @@ export const editWorkshopCurriculumSchema = Joi.object().keys({
     title: Joi.string().optional(),
     priority: Joi.number().optional(),
     description: Joi.string().allow('', null).optional(),
-    duration: Joi.string().allow('', null).optional(),
+    duration: Joi.number().optional(),
     attachment: Joi.string().allow('', null).optional(),
 })
 

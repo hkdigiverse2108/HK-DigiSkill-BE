@@ -119,7 +119,7 @@ export const get_workshop_by_id = async (req, res) => {
             { path: 'workshopTestimonials', select: 'name designation rate description image' },
             { path: 'workshopFAQ', select: 'question answer' }
         ];
-        
+
         const response = await findOneAndPopulate(workshopModel, { _id: new ObjectId(value.id), isDeleted: false }, {}, {}, populateModels)
         if (!response || response.isDeleted) return res.status(404).json(new apiResponse(404, responseMessage?.getDataNotFound("workshop"), {}, {}))
         response.isUnlocked = false
@@ -164,6 +164,8 @@ export const purchase_workshop = async (req, res) => {
 
         const response = await createData(workshopPaymentModel, purchaseData);
         if (!response) return res.status(404).json(new apiResponse(404, responseMessage?.addDataError, {}, {}))
+
+        await updateData(userModel, { _id: new ObjectId(response?.userId), isDeleted: false }, { $push: { workshopIds: new ObjectId(response.workshopId) } }, { new: true, timestamps: false })
         return res.status(200).json(new apiResponse(200, responseMessage?.purchaseSuccess, response, {}))
     } catch (error) {
         console.log(error)

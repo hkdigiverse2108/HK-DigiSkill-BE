@@ -1,5 +1,5 @@
 import { apiResponse, USER_ROLES } from "../../common";
-import { courseLessonModel, courseModel, userCourseModel } from "../../database";
+import { courseLessonModel, courseModel, userCourseModel, userModel } from "../../database";
 import { countData, createData, findAllWithPopulate, getFirstMatch, reqInfo, responseMessage, updateData } from "../../helper";
 import { addCourseSchema, editCourseSchema, deleteCourseSchema, getCourseSchema, purchaseCourseSchema } from "../../validation";
 
@@ -80,11 +80,11 @@ export const get_all_course = async (req, res) => {
         ];
         const response = await findAllWithPopulate(courseModel, criteria, {}, options, populateModel)
         const totalCount = await countData(courseModel, criteria)
-        
+
         let newResponse: any[] = [];
 
         for (let course of response) {
-            const totalLesson = await countData(courseLessonModel,{ courseId: course._id, isDeleted: false });
+            const totalLesson = await countData(courseLessonModel, { courseId: course._id, isDeleted: false });
             newResponse.push({
                 ...course,
                 totalLesson
@@ -153,7 +153,7 @@ export const purchase_course = async (req, res) => {
 
         const response = await createData(userCourseModel, purchaseData);
         if (!response) return res.status(404).json(new apiResponse(404, responseMessage?.addDataError, {}, {}))
-
+        await updateData(userModel, { _id: new ObjectId(response?.userId), isDeleted: false }, { $push: { courseIds: new ObjectId(response.courseId) } }, { new: true, timestamps: false })
         return res.status(200).json(new apiResponse(200, responseMessage?.purchaseSuccess, response, {}))
     } catch (error) {
         console.log(error)
@@ -187,7 +187,7 @@ export const get_my_courses = async (req, res) => {
         let newResponse: any[] = [];
 
         for (let course of response) {
-            const totalLesson = await countData(courseLessonModel,{ courseId: course.courseId, isDeleted: false });
+            const totalLesson = await countData(courseLessonModel, { courseId: course.courseId, isDeleted: false });
             newResponse.push({
                 ...course,
                 totalLesson
@@ -200,10 +200,10 @@ export const get_my_courses = async (req, res) => {
             page_limit: Math.ceil(totalCount / (parseInt(limit) || totalCount)) || 1,
         }
 
-        return res.status(200).json(new apiResponse(200, responseMessage.getDataSuccess('my courses'), { 
-            my_courses_data: newResponse, 
-            totalData: totalCount, 
-            state: stateObj 
+        return res.status(200).json(new apiResponse(200, responseMessage.getDataSuccess('my courses'), {
+            my_courses_data: newResponse,
+            totalData: totalCount,
+            state: stateObj
         }, {}))
     } catch (error) {
         console.log(error)

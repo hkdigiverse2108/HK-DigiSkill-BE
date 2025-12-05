@@ -1,6 +1,6 @@
 import { apiResponse, USER_ROLES } from "../../common";
 import { courseLessonModel, courseModel, userCourseModel, userModel } from "../../database";
-import { countData, createData, findAllWithPopulate, getFirstMatch, reqInfo, responseMessage, updateData } from "../../helper";
+import { countData, createData, findAllWithPopulate, findOneAndPopulate, getFirstMatch, reqInfo, responseMessage, updateData } from "../../helper";
 import { addCourseSchema, editCourseSchema, deleteCourseSchema, getCourseSchema, purchaseCourseSchema } from "../../validation";
 
 const ObjectId = require('mongoose').Types.ObjectId;
@@ -109,19 +109,22 @@ export const get_all_course = async (req, res) => {
 
 export const get_course_by_id = async (req, res) => {
     reqInfo(req)
+    let { user } = req.headers
     try {
         const { error, value } = getCourseSchema.validate(req.params)
         if (error) return res.status(501).json(new apiResponse(501, error?.details[0]?.message, {}, {}))
         const populateModel = [
             { path: 'courseCategoryId', select: 'name description' }
         ];
-        const response = await getFirstMatch(courseModel, { _id: new ObjectId(value.id), isDeleted: false }, {}, {})
-        if (response) {
-            const populatedResponse = await courseModel.findById(value.id).populate(populateModel).lean()
-            if (!populatedResponse) return res.status(404).json(new apiResponse(404, responseMessage?.getDataNotFound("course"), {}, {}))
-            return res.status(200).json(new apiResponse(200, responseMessage?.getDataSuccess("course"), populatedResponse, {}))
+
+        const response = await findOneAndPopulate(courseModel, { _id: new ObjectId(value.id), isDeleted: false }, {}, {}, populateModel)
+        if (!response || response.isDeleted) return res.status(404).json(new apiResponse(404, responseMessage?.getDataNotFound("workshop"), {}, {}))
+        response.isUnlocked = false
+        if (user && user?._id) {
+            let isExist = await getFirstMatch(userModel, { _id: new ObjectId(user._id), courseIds: { $in: [new ObjectId(value.id)] }, isDeleted: false }, {}, {})
+            if (isExist) response.isUnlocked = true
         }
-        return res.status(404).json(new apiResponse(404, responseMessage?.getDataNotFound("course"), {}, {}))
+        return res.status(200).json(new apiResponse(200, responseMessage?.getDataSuccess("workshop"), response, {}))
     } catch (error) {
         console.log(error)
         return res.status(500).json(new apiResponse(500, responseMessage?.internalServerError, {}, error))

@@ -81,13 +81,18 @@ export const get_all_course = async (req, res) => {
         const response = await findAllWithPopulate(courseModel, criteria, {}, options, populateModel)
         const totalCount = await countData(courseModel, criteria)
 
+        const unlockedSet = new Set(
+            (user?.courseIds || []).map((id) => id.toString())
+        );
+
         let newResponse: any[] = [];
 
         for (let course of response) {
             const totalLesson = await countData(courseLessonModel, { courseId: course._id, isDeleted: false });
             newResponse.push({
                 ...course,
-                totalLesson
+                totalLesson,
+                isUnlocked: unlockedSet.has(course?._id.toString()),
             });
         }
 

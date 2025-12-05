@@ -9,8 +9,8 @@ router.post('/update', adminJWT, courseController.edit_course_by_id);
 router.delete('/delete/:id', adminJWT, courseController.delete_course_by_id);
 router.post('/purchase', userJWT, courseController.purchase_course);
 router.get('/my-courses', userJWT, courseController.get_my_courses);
-router.get('/all', courseController.get_all_course);
-router.get('/:id', courseController.get_course_by_id);
+router.get('/all', userJWT, courseController.get_all_course);
+router.get('/:id', userJWT, courseController.get_course_by_id);
 
 export const courseRoute = router;
 

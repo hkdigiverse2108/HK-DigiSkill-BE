@@ -9,6 +9,7 @@ const courseSchema = new mongoose.Schema({
     mrpPrice: { type: Number, default: 0 },
     language: { type: String, default: null },
     image: { type: String },
+    pdf: { type: String },
     duration: { type: Number, default: 0 },
     purchasedCoursesShow: { type: Boolean, default: false },
     enrolledLearners: { type: Number, default: 0 },

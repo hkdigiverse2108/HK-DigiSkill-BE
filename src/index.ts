@@ -15,7 +15,11 @@ import multer from "multer"
 import fs from "fs"
 
 const app = express();
-
+app.use(cors({
+    origin: ["https://admin.hkdigiskill.com"],
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"]
+}));
 app.use("/images", express.static(path.join(__dirname, "..", "..", "images")));
 app.use("/pdf", express.static(path.join(__dirname, "..", "..", "pdf")));
 
@@ -48,11 +52,7 @@ const fileFilter = (req, file, cb) => {
     }
 };
 
-app.use(cors({
-    origin: ["https://admin.hkdigiskill.com"],
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    allowedHeaders: ["Content-Type", "Authorization"]
-}));
+
 app.use(mongooseConnection);
 app.use(multer({ storage: fileStorage, fileFilter }).fields([{ name: "images", maxCount: 100 }, { name: 'pdf', maxCount: 100 }]));
 app.use(bodyParser.json({ limit: "200mb" }));

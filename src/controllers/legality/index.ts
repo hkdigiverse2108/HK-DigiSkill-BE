@@ -28,8 +28,8 @@ export const get_legality = async (req, res) => {
 
         const response = await getFirstMatch(legalityModel, { isDeleted: false, ...match }, {}, {})
 
-        if (!response) return res.status(404).json(new apiResponse(404, responseMessage?.getDataNotFound("settings"), {}, {}))
-        return res.status(200).json(new apiResponse(200, responseMessage?.getDataSuccess("settings"), response, {}))
+        if (!response) return res.status(404).json(new apiResponse(404, responseMessage?.getDataNotFound("legality"), {}, {}))
+        return res.status(200).json(new apiResponse(200, responseMessage?.getDataSuccess(response?.type), response, {}))
     } catch (error) {
         console.log(error);
         return res.status(500).json(new apiResponse(500, responseMessage?.internalServerError, {}, error))

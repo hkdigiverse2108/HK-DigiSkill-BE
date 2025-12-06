@@ -15,11 +15,7 @@ import multer from "multer"
 import fs from "fs"
 
 const app = express();
-app.use(cors({
-    origin: ["https://admin.hkdigiskill.com"],
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    allowedHeaders: ["Content-Type", "Authorization"]
-}));
+app.use(cors());
 app.use("/images", express.static(path.join(__dirname, "..", "..", "images")));
 app.use("/pdf", express.static(path.join(__dirname, "..", "..", "pdf")));
 

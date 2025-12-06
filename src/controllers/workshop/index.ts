@@ -181,8 +181,9 @@ export const get_my_workshops = async (req, res) => {
             match.userId = new ObjectId(user._id)
         }
         const { page, limit } = req.query
+        let workshops = await workshopModel.find({ isDeleted: false })
         let criteria: any = { ...match, isDeleted: false }, options: any = { lean: true }
-
+        criteria.workshopId = { $in: workshops.map(e => new ObjectId(e._id)) }
         options.sort = { createdAt: -1 }
         if (page && limit) {
             options.skip = (parseInt(page) - 1) * parseInt(limit)

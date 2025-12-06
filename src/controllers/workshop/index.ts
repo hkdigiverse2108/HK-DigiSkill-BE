@@ -1,6 +1,6 @@
 import { apiResponse, USER_ROLES } from "../../common";
 import { userModel, workshopModel, workshopPaymentModel } from "../../database";
-import { countData, createData, findAllWithPopulate, findAllWithPopulateWithSorting, findOneAndPopulate, getFirstMatch, reqInfo, responseMessage, updateData } from "../../helper";
+import { countData, createData, findAllWithPopulate, findAllWithPopulateWithSorting, findOneAndPopulate, getData, getFirstMatch, reqInfo, responseMessage, updateData } from "../../helper";
 import { addWorkshopSchema, editWorkshopSchema, deleteWorkshopSchema, getWorkshopSchema, purchaseWorkshopSchema } from "../../validation";
 
 const ObjectId = require('mongoose').Types.ObjectId;
@@ -175,15 +175,15 @@ export const purchase_workshop = async (req, res) => {
 
 export const get_my_workshops = async (req, res) => {
     reqInfo(req)
-    let { user } = req.headers, match: any = {}
+    let { user } = req.headers, { page, limit } = req.query, criteria: any = { isDeleted: false }, options: any = { lean: true }
     try {
         if (user.role === USER_ROLES.USER) {
-            match.userId = new ObjectId(user._id)
+            criteria.userId = new ObjectId(user._id)
         }
-        const { page, limit } = req.query
-        let workshops = await workshopModel.find({ isDeleted: false })
-        let criteria: any = { ...match, isDeleted: false }, options: any = { lean: true }
-        criteria.workshopId = { $in: workshops.map(e => new ObjectId(e._id)) }
+
+        let workshops = await getData(workshopModel, { isDeleted: false }, {}, {})
+        criteria.courseId = { $in: workshops.map(e => new ObjectId(e._id)) }
+
         options.sort = { createdAt: -1 }
         if (page && limit) {
             options.skip = (parseInt(page) - 1) * parseInt(limit)

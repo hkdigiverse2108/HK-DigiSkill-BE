@@ -1,6 +1,6 @@
 import { apiResponse, USER_ROLES } from "../../common";
 import { courseLessonModel, courseModel, userCourseModel, userModel } from "../../database";
-import { countData, createData, findAllWithPopulate, findOneAndPopulate, getFirstMatch, reqInfo, responseMessage, updateData } from "../../helper";
+import { countData, createData, findAllWithPopulate, findOneAndPopulate, getData, getFirstMatch, reqInfo, responseMessage, updateData } from "../../helper";
 import { addCourseSchema, editCourseSchema, deleteCourseSchema, getCourseSchema, purchaseCourseSchema } from "../../validation";
 
 const ObjectId = require('mongoose').Types.ObjectId;
@@ -177,6 +177,9 @@ export const get_my_courses = async (req, res) => {
         if (user?.role === USER_ROLES.USER) {
             criteria.userId = new ObjectId(user._id)
         }
+
+        let courses = await getData(courseModel, { isDeleted: false }, {}, {})
+        criteria.courseId = { $in: courses.map(e => new ObjectId(e._id)) }
 
         options.sort = { createdAt: -1 }
         if (page && limit) {

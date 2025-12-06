@@ -9,7 +9,7 @@ export const add_legality = async (req, res) => {
         const { error, value } = addEditLegalitySchema.validate(req.body)
         if (error) return res.status(501).json(new apiResponse(501, error?.details[0]?.message, {}, {}))
 
-        const response = await updateData(legalityModel, { isDeleted: false }, value, { upsert: true })
+        const response = await updateData(legalityModel, { type: value.type, isDeleted: false }, value, { upsert: true })
 
         return res.status(200).json(new apiResponse(200, responseMessage?.addDataSuccess("legality"), response, {}))
     } catch (error) {
@@ -23,13 +23,12 @@ export const get_legality = async (req, res) => {
     reqInfo(req)
     let match: any = {}, { typeFilter } = req.query
     try {
-        
-        if(typeFilter) match.type = typeFilter
+
+        if (typeFilter) match.type = typeFilter
 
         const response = await getFirstMatch(legalityModel, { isDeleted: false, ...match }, {}, {})
 
         if (!response) return res.status(404).json(new apiResponse(404, responseMessage?.getDataNotFound("settings"), {}, {}))
-
         return res.status(200).json(new apiResponse(200, responseMessage?.getDataSuccess("settings"), response, {}))
     } catch (error) {
         console.log(error);

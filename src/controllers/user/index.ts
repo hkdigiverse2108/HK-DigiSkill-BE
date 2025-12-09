@@ -17,12 +17,12 @@ export const add_user = async (req, res) => {
         existingUser = await getFirstMatch(userModel, { phoneNumber: value?.phoneNumber, role: USER_ROLES.USER, isDeleted: false }, {}, {})
         if (existingUser) return res.status(400).json(new apiResponse(400, responseMessage?.dataAlreadyExist("Phone Number"), {}, {}))
 
-        let otp = await getUniqueOtp()
+        // let otp = await getUniqueOtp()
         value.password = await generateHash(value.password)
-        value.otp = otp;
-        value.otpExpireTime = new Date(Date.now() + 2 * 60 * 1000);
+        // value.otp = otp;
+        // value.otpExpireTime = new Date(Date.now() + 2 * 60 * 1000);
 
-        email_verification_mail(value, otp);
+        // email_verification_mail(value, otp);
         const response = await createData(userModel, value);
         if (!response) return res.status(404).json(new apiResponse(404, responseMessage?.addDataError, {}, {}))
 

@@ -1,6 +1,6 @@
 import { apiResponse } from "../../common";
 import { testimonialModel } from "../../database";
-import { aggregateData, countData, createData, getDataWithSorting, getFirstMatch, reqInfo, responseMessage, updateData } from "../../helper";
+import { aggregateData, countData, createData, findAllWithPopulate, getDataWithSorting, getFirstMatch, reqInfo, responseMessage, updateData } from "../../helper";
 import { addTestimonialSchema, editTestimonialSchema, deleteTestimonialSchema, getTestimonialSchema } from "../../validation";
 
 const ObjectId = require('mongoose').Types.ObjectId;
@@ -66,10 +66,10 @@ export const get_all_testimonial = async (req, res) => {
             criteria.type = type
         }
 
-        if(learningCatalogFilter){
+        if (learningCatalogFilter) {
             criteria.learningCatalogId = new ObjectId(learningCatalogFilter)
         }
-        
+
         if (isFeatured !== undefined) {
             criteria.isFeatured = isFeatured === 'true'
         }
@@ -81,18 +81,20 @@ export const get_all_testimonial = async (req, res) => {
             options.skip = (parseInt(page) - 1) * parseInt(limit)
             options.limit = parseInt(limit)
         }
-
-        const response = await getDataWithSorting(testimonialModel, criteria, {}, options)
+        let populateModel = [
+            { path: "learningCatalogId", }
+        ]
+        const response = await findAllWithPopulate(testimonialModel, criteria, {}, options, populateModel)
         const totalCount = await countData(testimonialModel, criteria)
         const stateObj = {
             page: parseInt(page) || 1,
             limit: parseInt(limit) || totalCount,
             page_limit: Math.ceil(totalCount / (parseInt(limit) || totalCount)) || 1,
         }
-        return res.status(200).json(new apiResponse(200, responseMessage.getDataSuccess('testimonial'), { 
-            testimonial_data: response, 
-            totalData: totalCount, 
-            state: stateObj 
+        return res.status(200).json(new apiResponse(200, responseMessage.getDataSuccess('testimonial'), {
+            testimonial_data: response,
+            totalData: totalCount,
+            state: stateObj
         }, {}))
     } catch (error) {
         console.log(error)

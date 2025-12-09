@@ -1,5 +1,5 @@
 import express from 'express';
-import { courseController, dashboardController } from '../controllers';
+import { dashboardController } from '../controllers';
 import { adminJWT } from '../helper';
 
 const router = express.Router();

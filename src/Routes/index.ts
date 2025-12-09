@@ -22,6 +22,7 @@ import { instructorRoute } from './instructor'
 import { referralCodeRoute } from './referral-code'
 import { uploadRoute } from './upload'
 import { aboutUsRouter } from './about-us'
+import { dashboardRoute } from './dashboard'
 
 const router = express.Router()
 
@@ -48,5 +49,6 @@ router.use('/instructor', instructorRoute)
 router.use('/referral-code', referralCodeRoute)
 router.use('/upload', uploadRoute)
 router.use('/about-us', aboutUsRouter)
+router.use('/dashboard', dashboardRoute)
 
 export { router }

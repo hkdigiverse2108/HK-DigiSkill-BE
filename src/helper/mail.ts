@@ -20,7 +20,7 @@ export const email_verification_mail = async (user: any, otp: any) => {
     return new Promise(async (resolve, reject) => {
         try {
             const mailOptions = {
-                from: mail.MAIL,
+                from: mail,
                 to: user.email,
                 subject: "Login OTP - HK DigiSkill",
                 html: `
@@ -66,6 +66,56 @@ export const email_verification_mail = async (user: any, otp: any) => {
                     reject(err);
                 } else {
                     resolve(`Email has been sent to ${user.email}`);
+                }
+            });
+
+        } catch (error) {
+            console.log(error);
+            reject(error);
+        }
+    });
+}
+
+export const send_newsletter = async (email: string, subject: string, htmlMessage: string) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            // Wrap the HTML message in a proper email template
+            const htmlContent = `
+                <html lang="en-US">
+                <head>
+                    <meta charset="utf-8" />
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+                    <title>${subject}</title>
+                </head>
+                <body style="margin:0; padding:20px; background:#f7f7f7; font-family:Arial, sans-serif;">
+                    <table width="100%" cellpadding="0" cellspacing="0" style="max-width:600px; margin:auto; background:#fff; padding:25px; border-radius:8px; box-shadow:0 2px 10px rgba(0,0,0,0.1);">
+                        <tr>
+                            <td>
+                                ${htmlMessage}
+                            </td>
+                        </tr>
+                    </table>
+                </body>
+                </html>
+            `;
+
+            const mailOptions = {
+                from: mail,
+                to: email,
+                subject: subject,
+                html: htmlContent,
+            };
+
+            await transPorter.sendMail(mailOptions, function (err, data) {
+                if (err) {
+                    console.log(err);
+                    reject(err);
+                } else {
+                    resolve({
+                        success: true,
+                        message: `Newsletter has been sent to ${email}`,
+                        recipients: email
+                    });
                 }
             });
 

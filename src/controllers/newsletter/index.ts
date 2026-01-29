@@ -1,7 +1,7 @@
 import { apiResponse } from "../../common";
 import { newsletterModel } from "../../database";
-import { countData, createData, getDataWithSorting, getFirstMatch, reqInfo, responseMessage, updateData } from "../../helper";
-import { addNewsletterSchema, deleteNewsletterSchema, getNewsletterSchema } from "../../validation";
+import { countData, createData, getDataWithSorting, getFirstMatch, reqInfo, responseMessage, send_newsletter, updateData } from "../../helper";
+import { addNewsletterSchema, deleteNewsletterSchema, getNewsletterSchema, sendNewsletterSchema } from "../../validation";
 
 const ObjectId = require('mongoose').Types.ObjectId;
 
@@ -64,10 +64,10 @@ export const get_all_newsletter = async (req, res) => {
             limit: parseInt(limit) || totalCount,
             page_limit: Math.ceil(totalCount / (parseInt(limit) || totalCount)) || 1,
         }
-        return res.status(200).json(new apiResponse(200, responseMessage.getDataSuccess('newsletter'), { 
-            newsletter_data: response, 
-            totalData: totalCount, 
-            state: stateObj 
+        return res.status(200).json(new apiResponse(200, responseMessage.getDataSuccess('newsletter'), {
+            newsletter_data: response,
+            totalData: totalCount,
+            state: stateObj
         }, {}))
     } catch (error) {
         console.log(error)
@@ -89,3 +89,21 @@ export const get_newsletter_by_id = async (req, res) => {
     }
 }
 
+export const send_newsletter_to_subscribers = async (req, res) => {
+    reqInfo(req)
+    try {
+        const { error, value } = sendNewsletterSchema.validate(req.body)
+        if (error) return res.status(501).json(new apiResponse(501, error?.details[0]?.message, {}, {}))
+
+        let { emails, subject, message } = value
+
+        for (let email of emails) {
+            await send_newsletter(email, subject, message)
+        }
+
+        return res.status(200).json(new apiResponse(200, "Newsletter sent successfully", {}, {}))
+    } catch (error) {
+        console.log(error)
+        return res.status(500).json(new apiResponse(500, responseMessage?.internalServerError, {}, error))
+    }
+}

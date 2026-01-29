@@ -12,3 +12,8 @@ export const getNewsletterSchema = Joi.object().keys({
     id: Joi.string().required(),
 })
 
+export const sendNewsletterSchema = Joi.object().keys({
+    emails: Joi.array().items(Joi.string().required()).optional(),
+    subject: Joi.string().required(),
+    message: Joi.string().required(),
+})

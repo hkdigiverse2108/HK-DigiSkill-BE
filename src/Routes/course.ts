@@ -6,6 +6,7 @@ const router = express.Router();
 
 router.post('/add', adminJWT, courseController.add_course);
 router.post('/update', adminJWT, courseController.edit_course_by_id);
+router.post("/verify", courseController.verifyPayment)
 router.delete('/delete/:id', adminJWT, courseController.delete_course_by_id);
 router.post('/purchase', userJWT, courseController.purchase_course);
 router.get('/my-courses', userJWT, courseController.get_my_courses);

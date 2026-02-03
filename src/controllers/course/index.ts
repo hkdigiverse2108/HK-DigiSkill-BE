@@ -1,7 +1,8 @@
 import { apiResponse, USER_ROLES } from "../../common";
-import { courseLessonModel, courseModel, userCourseModel, userModel } from "../../database";
+import { courseLessonModel, courseModel, settingsModel, userCourseModel, userModel } from "../../database";
 import { countData, createData, findAllWithPopulate, findOneAndPopulate, getData, getFirstMatch, reqInfo, responseMessage, updateData } from "../../helper";
 import { addCourseSchema, editCourseSchema, deleteCourseSchema, getCourseSchema, purchaseCourseSchema } from "../../validation";
+import Razorpay from "razorpay";
 
 const ObjectId = require('mongoose').Types.ObjectId;
 
@@ -222,3 +223,20 @@ export const get_my_courses = async (req, res) => {
     }
 }
 
+export const verifyPayment = async (req, res) => {
+    reqInfo(req)
+    try {
+        const { payment_id } = req.body;
+        let setting = await settingsModel.findOne({});
+        const razorpay = new Razorpay({
+            key_id: setting.razorpayKey,
+            key_secret: setting.razorpaySecret,
+        });
+
+        const payment = await razorpay.payments.fetch(payment_id);
+        return res.status(200).json(new apiResponse(200, responseMessage?.getDataSuccess("verify payment"), payment, {}))
+    } catch (error) {
+        console.log("Razorpay verify error:", error);
+        return res.status(500).json(new apiResponse(500, responseMessage?.internalServerError, {}, {}));
+    }
+};

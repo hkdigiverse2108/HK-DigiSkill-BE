@@ -1,7 +1,8 @@
-import { apiResponse, generateHash, getUniqueOtp, USER_ROLES } from "../../common";
+import { apiResponse, generateHash, generateToken, USER_ROLES } from "../../common";
 import { userAccountDeletionModel, userModel } from "../../database";
-import { countData, createData, email_verification_mail, findAllWithPopulate, getDataWithSorting, getFirstMatch, reqInfo, responseMessage, updateData } from "../../helper";
+import { countData, createData, findAllWithPopulate, getDataWithSorting, getFirstMatch, reqInfo, responseMessage, updateData } from "../../helper";
 import { addUserSchema, editUserSchema, deleteUserSchema, getUserSchema } from "../../validation";
+import bcryptjs from 'bcryptjs'
 
 const ObjectId = require('mongoose').Types.ObjectId;
 
@@ -27,6 +28,41 @@ export const add_user = async (req, res) => {
         if (!response) return res.status(404).json(new apiResponse(404, responseMessage?.addDataError, {}, {}))
 
         return res.status(200).json(new apiResponse(200, responseMessage?.addDataSuccess("user"), response, {}))
+    } catch (error) {
+        console.log(error)
+        return res.status(500).json(new apiResponse(500, responseMessage?.internalServerError, {}, error))
+    }
+}
+
+export const user_signup = async (req, res) => {
+    reqInfo(req)
+    try {
+        const { error, value } = addUserSchema.validate(req.body)
+        if (error) return res.status(501).json(new apiResponse(501, error?.details[0]?.message, {}, {}))
+
+        let existingUser = await getFirstMatch(userModel, { email: value?.email, role: USER_ROLES.USER, isDeleted: false }, {}, {})
+
+        if (existingUser) {
+            const passwordMatch = await bcryptjs.compare(value.password, existingUser.password)
+            if (!passwordMatch) return res.status(400).json(new apiResponse(400, responseMessage?.invalidUserPasswordEmail, {}, {}))
+        }
+
+        if (!existingUser) {
+            if (value.password) value.password = await generateHash(value.password)
+
+            existingUser = await createData(userModel, value);
+            if (!existingUser) return res.status(404).json(new apiResponse(404, responseMessage?.addDataError, {}, {}))
+        }
+
+        const token = await generateToken({
+            _id: existingUser._id,
+            status: "Login",
+            generatedOn: (new Date().getTime())
+        }, { expiresIn: '24h' })
+
+        let newResponse = { ...existingUser?._doc ? existingUser?._doc : existingUser, token }
+
+        return res.status(200).json(new apiResponse(200, "Details Saved successfully", { ...newResponse, token }, {}))
     } catch (error) {
         console.log(error)
         return res.status(500).json(new apiResponse(500, responseMessage?.internalServerError, {}, error))

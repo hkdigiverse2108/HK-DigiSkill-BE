@@ -1,5 +1,5 @@
 import { apiResponse, USER_ROLES } from "../../common";
-import { courseLessonModel, courseModel, settingsModel, userCourseModel, userModel } from "../../database";
+import { courseCurriculumModel, courseLessonModel, courseModel, settingsModel, userCourseModel, userModel } from "../../database";
 import { countData, createData, findAllWithPopulate, findOneAndPopulate, getData, getFirstMatch, reqInfo, responseMessage, updateData } from "../../helper";
 import { addCourseSchema, editCourseSchema, deleteCourseSchema, getCourseSchema, purchaseCourseSchema } from "../../validation";
 import Razorpay from "razorpay";
@@ -89,7 +89,7 @@ export const get_all_course = async (req, res) => {
         let newResponse: any[] = [];
 
         for (let course of response) {
-            const totalLesson = await countData(courseLessonModel, { courseId: course._id, isDeleted: false });
+            const totalLesson = await countData(courseCurriculumModel, { courseId: course._id, isDeleted: false });
             newResponse.push({
                 ...course,
                 totalLesson,

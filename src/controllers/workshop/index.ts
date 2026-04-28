@@ -1,5 +1,5 @@
 import { apiResponse, USER_ROLES } from "../../common";
-import { userModel, workshopModel, workshopPaymentModel } from "../../database";
+import { userModel, workshopCurriculumModel, workshopModel, workshopPaymentModel } from "../../database";
 import { countData, createData, findAllWithPopulate, findAllWithPopulateWithSorting, findOneAndPopulate, getData, getFirstMatch, reqInfo, responseMessage, updateData } from "../../helper";
 import { addWorkshopSchema, editWorkshopSchema, deleteWorkshopSchema, getWorkshopSchema, purchaseWorkshopSchema } from "../../validation";
 
@@ -79,17 +79,22 @@ export const get_all_workshop = async (req, res) => {
         ]
 
         const workshops = await findAllWithPopulateWithSorting(workshopModel, criteria, {}, options, populateModel)
-
         const totalCount = await countData(workshopModel, criteria)
 
         const unlockedSet = new Set(
             (user?.workshopIds || []).map((id) => id.toString())
         );
 
-        const response = workshops.map((w) => ({
-            ...w,
-            isUnlocked: unlockedSet.has(w._id.toString()),
-        }));
+        let newResponse: any[] = [];
+
+        for (let workshop of workshops) {
+            const totalLesson = await countData(workshopCurriculumModel, { workshopId: workshop._id, isDeleted: false });
+            newResponse.push({
+                ...workshop,
+                totalLesson,
+                isUnlocked: unlockedSet.has(workshop?._id.toString()),
+            });
+        }
 
         const stateObj = {
             page: parseInt(page) || 1,
@@ -97,7 +102,7 @@ export const get_all_workshop = async (req, res) => {
             page_limit: Math.ceil(totalCount / (parseInt(limit) || totalCount)) || 1,
         }
         return res.status(200).json(new apiResponse(200, responseMessage.getDataSuccess('workshop'), {
-            workshop_data: response,
+            workshop_data: newResponse,
             totalData: totalCount,
             state: stateObj
         }, {}))

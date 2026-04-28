@@ -125,8 +125,12 @@ export const get_workshop_by_id = async (req, res) => {
             { path: 'workshopFAQ', select: 'question answer' }
         ];
 
-        const response = await findOneAndPopulate(workshopModel, { _id: new ObjectId(value.id), isDeleted: false }, {}, {}, populateModels)
+        const response = await findOneAndPopulate(workshopModel, { _id: new ObjectId(value.id), isDeleted: false }, {}, { lean: true }, populateModels)
         if (!response || response.isDeleted) return res.status(404).json(new apiResponse(404, responseMessage?.getDataNotFound("workshop"), {}, {}))
+        
+        const totalLesson = await countData(workshopCurriculumModel, { workshopId: response._id, isDeleted: false });
+        response.totalLesson = totalLesson;
+        
         response.isUnlocked = false
         if (user && user?._id) {
             let isExist = await userModel.findOne({ _id: new ObjectId(user._id), workshopIds: { $in: [new ObjectId(value.id)] }, isDeleted: false }).lean()
